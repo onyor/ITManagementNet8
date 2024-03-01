@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>ITX.Domain</AssemblyName>
+		<RootNamespace>ITX.Domain</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Entities\ListeYonetim\**" />
+		<Compile Remove="Entities\Platform\**" />
+		<Compile Remove="Events\**" />
+		<Compile Remove="Exceptions\**" />
+		<Compile Remove="ValueObjects\**" />
+		<EmbeddedResource Remove="Entities\ListeYonetim\**" />
+		<EmbeddedResource Remove="Entities\Platform\**" />
+		<EmbeddedResource Remove="Events\**" />
+		<EmbeddedResource Remove="Exceptions\**" />
+		<EmbeddedResource Remove="ValueObjects\**" />
+		<None Remove="Entities\ListeYonetim\**" />
+		<None Remove="Entities\Platform\**" />
+		<None Remove="Events\**" />
+		<None Remove="Exceptions\**" />
+		<None Remove="ValueObjects\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.Specification" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.26" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.26" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+</Project>

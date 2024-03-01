@@ -1,0 +1,43 @@
+﻿@model ITX.WebMVC.Components.LogModel;
+
+<div id="AuditLogModal" data-domainName="@Model.DName" data-pageName="@Model.PName" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Audit Log</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <i class="far fa-exclamation-circle mr-2 mb-2 fa-lg"></i> <h5 class="d-inline"> Değiştirilen son 10 kayıt gösterilmektedir. Daha detaylı inceleme için yönetim işlemlerini kullanınız.</h5>
+                        <div id="panel-1" class="panel">
+                            <div class="panel-container show">
+                                <div class="panel-content">
+                                    <div class="row row-grid no-gutters border-faded align-items-center">
+                                        <div class="col col-12 auditPanel">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    İptal
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/app/pageScripts/administration/logdetailmodal.js"></script>

@@ -1,0 +1,1 @@
+1|INV_ITEM|Women's dress made of cotton|1234.12.1234|20|EA|50|EUR|2||CN|SON|12AB|N|

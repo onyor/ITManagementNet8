@@ -1,0 +1,105 @@
+
+<div class="row">
+    <div class="col">
+        <div class="table-responsive h-scrollbar-primary">
+            <table id="UserClaimTable" data-topButtons="add" data-orderarray='1,"asc"' class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                <thead>
+                    <tr>
+                        <th col-data='UserIdName' col-type='text'>Kullanıcı</th>
+                        <th col-data='ClaimType' col-type='text'>Tip</th>
+                        <th col-data='UpdatedAt' col-type='date'>Güncellenme Tarihi</th>
+                        <th col-role="action" action-list="edit,delete">İşlemler</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="UserClaimModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Kullanıcıya Bağlı Yetki Düzenle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="UserClaimForm">
+                    <input id="hdnDataId" name="Id" type="hidden" value="" data-id-type="number" />
+                    <input id="hdnClaimType" name="ClaimType" type="hidden" value="" data-id-type="text" />
+                    <input id="hdnClaimValue" name="ClaimValue" type="hidden" value="True" data-fiexvalue data-id-type="bool" />
+                    <input id="hdnIsActive" name="IsActive" type="hidden" value="True" data-fiexvalue data-id-type="bool" />
+                    <input id="hdnIsDeleted" name="IsDeleted" type="hidden" value="True" data-fiexvalue data-id-type="bool" />
+                    <div class="col">
+                        <label class="form-label" for="UserList">Kullanıcı Listesi</label>
+                        <select id="UserList" name="UserId" class="form-control form-control-xs mw-100 mul-select" opt-sel2="true" multiple="multiple" data-type="static" source="Identity/GetAll/User" data-text="name" data-value="id" opt-initialText>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="ClaimtTypeIds" class="form-label d-flex">Yetki Tip Listesi</label>
+                        <select id="ClaimtTypeIds" name="ClaimTypeId" class="form-control form-control-xs mul-select" opt-sel2="true" data-type="static" source="Identity/GetAll/ClaimType" data-text="name" data-value="id" opt-initialText required>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    İptal
+                </button>
+                <button class="btn btn-primary" data-role="update" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="BulkUserClaimModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Kullanıcıya Bağlı Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="UserClaimAllForm">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="UserList">Kullanıcı Listesi</label>
+                            <select id="UserList" name="UserList" class="form-control form-control-xs mw-100 mul-select" opt-sel2="true" data-type="static" multiple="multiple" source="Identity/GetAll/User" data-text="name" data-value="id" opt-initialText>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="ClaimtTypeIds" class="form-label d-flex">Yetki Tip Listesi</label>
+                            <select id="ClaimtTypeIds" name="ClaimtTypeIds" class="form-control form-control-xs mul-select" opt-sel2="true" data-type="static" multiple="multiple" source="Identity/GetAll/ClaimType" data-text="name" data-value="id" opt-initialText required>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    İptal
+                </button>
+                <button class="btn btn-primary" data-role="save" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

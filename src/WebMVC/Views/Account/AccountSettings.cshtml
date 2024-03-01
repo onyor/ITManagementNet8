@@ -1,0 +1,240 @@
+﻿<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb")
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="accordion" id="js_demo_accordion-7">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="javascript:void(0);" class="card-title px-3 py-2 bg-warning-900 text-white" data-toggle="collapse" data-target="#js_demo_accordion-7a" aria-expanded="false">
+                            <i class="fas fa-key width-2 fs-xl"></i>
+                            <span>Kullanıcı Bilgileri</span>
+                            <span class="ml-auto">
+                                <span class="collapsed-reveal">
+                                    <i class="fal fa-minus fs-xl"></i>
+                                </span>
+                                <span class="collapsed-hidden">
+                                    <i class="fal fa-plus fs-xl"></i>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div id="js_demo_accordion-7a" class="collapse " data-parent="#js_demo_accordion-7">
+                        <div class="card-body bg-warning-900 p-5">
+                            <form name="AccountForm" autocomplete="off">
+                                <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" for="name">Firma Adı</label>
+                                        <input type="text" id="Name" name="Name" class="form-control form-control-xs" autocomplete="off" required />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="authorizedpersonname">Yetkili Adı</label>
+                                        <input type="text" id="AuthorizedPersonName" name="AuthorizedPersonName" class="form-control form-control-xs" autocomplete="off" required />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" for="Email">E Posta</label><div class="input-group">
+                                            <input type="text" id="Email" name="Email" class="form-control form-control-xs" autocomplete="off" required />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="Password">Şifre</label>
+                                        <input type="password" id="Password" name="Password" class="form-control form-control-xs" minlength="8" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" for="RoleList">Roller</label>
+                                        <input type="text" id="RoleList" name="RoleList" class="form-control form-control-xs" autocomplete="off" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="PhoneNumber">Telefon Numarası</label>
+                                        <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control form-control-xs" autocomplete="off" data-inputmask="'mask': '(999) 999-9999'" />
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button class="btn btn-info " data-role="save" type="button">
+                                    Kaydet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*  <div class="card">
+                <div class="card-header">
+                <a href="javascript:void(0);" class="card-title px-3 py-2 collapsed bg-primary-300 text-white" data-toggle="collapse" data-target="#js_demo_accordion-7b" aria-expanded="false">
+                <i class="fas fa-file-invoice-dollar width-2 fs-xl"></i>
+                Başka Bilgiler
+                <span class="ml-auto">
+                <span class="collapsed-reveal">
+                <i class="fal fa-minus fs-xl"></i>
+                </span>
+                <span class="collapsed-hidden">
+                <i class="fal fa-plus fs-xl"></i>
+                </span>
+                </span>
+                </a>
+                </div>
+                <div id="js_demo_accordion-7b" class="collapse" data-parent="#js_demo_accordion-7">
+                <div class="card-body bg-primary-200 p-5 text-white">
+                Ayar #2
+                </div>
+                </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="row d-none">
+        <div class="col-xl-12">
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="accordion accordion-hover" id="accordion-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-title" data-toggle="collapse" data-target="#accordion-1a" aria-expanded="true">
+                                    <i class="fas fa-key width-2 fs-xl"></i>
+                                    <span data-translate="login.ChangePassword"></span>
+                                    <span class="ml-auto">
+                                        <span class="collapsed-reveal">
+                                            <i class="fal fa-chevron-up fs-xl"></i>
+                                        </span>
+                                        <span class="collapsed-hidden">
+                                            <i class="fal fa-chevron-down fs-xl"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="accordion-1a" class="collapse show bg-primary-900" data-parent="#accordion-1">
+                                <div class="col-md-6 offset-md-3 p-5 ">
+                                    <span class="anchor" id="formChangePassword"></span>
+                                    <!-- form card change password -->
+                                    <div class="card card-outline-secondary p-3">
+                                        <div class="card-body ">
+                                            <div class="form-group">
+                                                <form id="AccountSettingForm" name="AccountSettingForm">
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <label for="CurrentPassword" class="form-label" data-translate="login.CurrentPassword"></label>
+                                                            <input type="password" id="CurrentPassword" name="CurrentPassword" class="form-control" required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <label for="NewPassword" class="form-label" data-translate="login.NewPassword"></label>
+                                                            <input type="password" id="NewPassword" name="NewPassword" class="form-control" required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <label for="ConfirmNewPassword" class="form-label" data-translate="login.NewPasswordAgain"></label>
+                                                            <input type="password" id="ConfirmNewPassword" name="ConfirmNewPassword" class="form-control" required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3 justify-content-md-end">
+                                                        <div class="col">
+                                                            <button class="btn btn-primary" id="addRowBtn" data-role="save" type="button">
+                                                                Kaydet
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /form card change password -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="javascript:void(0);" class="card-title collapsed" data-toggle="collapse" data-target="#accordion-1b" aria-expanded="false">
+                                    <i class="fas fa-file-invoice-dollar width-2 fs-xl"></i>
+                                    Ayar #2
+                                    <span class="ml-auto">
+                                        <span class="collapsed-reveal">
+                                            <i class="fal fa-chevron-up fs-xl"></i>
+                                        </span>
+                                        <span class="collapsed-hidden">
+                                            <i class="fal fa-chevron-down fs-xl"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="accordion-1b" class="collapse" data-parent="#accordion-1">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="javascript:void(0);" class="card-title collapsed" data-toggle="collapse" data-target="#accordion-1c" aria-expanded="false">
+                                    <i class="far fa-chart-bar width-2 fs-xl"></i>
+                                    Rapor Ayarlarİ
+                                    <span class="ml-auto">
+                                        <span class="collapsed-reveal">
+                                            <i class="fal fa-chevron-up fs-xl"></i>
+                                        </span>
+                                        <span class="collapsed-hidden">
+                                            <i class="fal fa-chevron-down fs-xl"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="accordion-1c" class="collapse" data-parent="#accordion-1">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="javascript:void(0);" class="card-title collapsed" data-toggle="collapse" data-target="#accordion-1d" aria-expanded="false">
+                                    <i class="fas fa-file-signature width-2 fs-xl"></i>
+                                    kullanıcı Sözleşmesi
+                                    <span class="ml-auto">
+                                        <span class="collapsed-reveal">
+                                            <i class="fal fa-chevron-up fs-xl"></i>
+                                        </span>
+                                        <span class="collapsed-hidden">
+                                            <i class="fal fa-chevron-down fs-xl"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="accordion-1d" class="collapse" data-parent="#accordion-1">
+                                <div class="row form-group">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="card-body">
+                                            <iframe style="position:absolute; left:0; top:0; width:100%; height:100%" src="" width="100"></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="panel-container show">
+                                            <div class="panel-content m-3">
+                                                <form action="/upload" class="dropzone needsclick" style="min-height: 7rem;">
+                                                    <div class="dz-message needsclick">
+                                                        <i class="fal fa-cloud-upload text-muted mb-3"></i>
+                                                        <br>
+                                                        <span class="text-uppercase">Drop files here or click to upload.</span>
+                                                        <br>
+                                                        <span class="fs-sm text-muted">This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.</span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

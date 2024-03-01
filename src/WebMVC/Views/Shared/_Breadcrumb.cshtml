@@ -1,0 +1,46 @@
+﻿@{
+    Dictionary<string, Dictionary<string, string>> parents = Model;
+}
+@if (parents != null)
+{
+    <div class="col-lg-12">
+        <div class="panel">
+            <div class="show">
+                <div class="panel-content">
+                    <ol class="bg-primary breadcrumb m-0">
+                        @foreach (var parent in parents)
+                        {
+                            @foreach (var item in parent.Value)
+                            {
+                                <li class="breadcrumb-item @(parent.Key == "ActivePage" ? "active" : "") ">
+                                    @if (parent.Key == "HasSub")
+                                    {
+                                        <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#">
+                                            <span>@parent.Value.First(t => t.Key == "jsonKey").Value</span>
+                                            <i class="fal fa-angle-down text-white"></i>
+                                        </a>
+                                        <div class="dropdown-menu" data-subsparent="@item.Value" style="left: 110px; position: absolute; top: 114px; will-change: top, left;" x-placement="bottom-start">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        if (parent.Key == "ActivePage")
+                                        {
+                                            <span>@item.Value</span>
+                                        }
+                                        else
+                                        {
+                                            <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#">
+                                                <span>@item.Value</span>
+                                            </a>
+                                        }
+                                    }
+                                </li>
+                            }
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+}

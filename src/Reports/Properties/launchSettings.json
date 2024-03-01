@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HRM.Reports": {
+      "commandName": "Project",
+      "launchBrowser": true
+    }
+  }
+}

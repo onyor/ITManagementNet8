@@ -1,0 +1,28 @@
+ //foreach (DataRow rowItem in dataset.Tables[0].Rows)
+                    //{
+                    //    i++;
+                    //    if (i > 1)
+                    //    {
+                    //        ZonePointDto zonePointDto = new ZonePointDto();
+                    //        zonePointDto.Point = rowItem[3].ToString().xToDecimal();
+                    //        zonePointDto.Weight = rowItem[4].ToString().xToDecimal();
+                    //        string countryName = rowItem[0].ToString().Trim();
+                    //        string cargoCompany = rowItem[1].ToString().Trim();
+                    //        int zoneNo = rowItem[2].ToString().xToInt();
+                    //        var ZoneDefinitionInfo = await _context.ZoneDefinitions.Include(x => x.Country).Where(x => x.IsActive && !x.IsDeleted && x.Country.Name == countryName && x.ZoneNo == zoneNo).FirstOrDefaultAsync();
+                    //        if (ZoneDefinitionInfo != null)
+                    //        {
+                    //            zonePointDto.ZoneDefinitionId = ZoneDefinitionInfo.Id;
+                    //            var existDto = _context.ZonePoints.Where(x => x.ZoneDefinitionId == zonePointDto.ZoneDefinitionId).FirstOrDefault();
+                    //            if (existDto != null)
+                    //            {
+
+                    //                existDto.Point = zonePointDto.Point;
+                    //                 await  _context.SaveChangesAsync();
+
+                    //            }
+                    //            else
+                    //            await AddAsync(zonePointDto);
+                    //        }
+                    //    }
+                    //}

@@ -1,0 +1,17 @@
+﻿@using System.Security.Claims;
+@{
+    //if (User.HasClaim("Create User", "Create User") && User.HasClaim("Create Role", "Create Role"))
+    //{
+    //    Layout = "~/Views/Shared/Request/Main.cshtml";
+    //}
+    if (User.IsInRole("Tester"))
+    {
+        var appAdmin = Context.Request.Query["aa"];
+        if (appAdmin == "1")
+            Layout = "~/Views/Shared/Admin/_SmartAdmin.cshtml";
+        else
+            Layout = "~/Views/Shared/Tester/_SmartAdmin.cshtml";
+    }
+    else
+        Layout = "~/Views/Shared/Admin/_SmartAdmin.cshtml";
+}

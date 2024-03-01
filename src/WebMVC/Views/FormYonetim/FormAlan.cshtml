@@ -1,0 +1,117 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <span id="modalCaption" class="form-span">Form Alan Ekle/Güncelle</span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+            <span aria-hidden="true">
+                <i class="fal fa-times"></i>
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <form name="FormAlanForm" autocomplete="off">
+                <input type="hidden" id="hdnFormAlanId" name="Id" value="" data-id-type="number" />
+                <div class="form-group mb-2">
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="Ad" class="form-label">*Ad</label>
+                            <input type="text" id="Ad" name="Ad" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="Etiket" class="form-label">*Etiket</label>
+                            <input type="text" id="Etiket" name="Etiket" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="VeriTip" class="form-label">*Veri Tipi</label>
+                            <select id="VeriTip" name="VeriTip" class="form-control form-control-xs">
+                                <option value="40">Metin</option>
+                                <option value="10">Sayı</option>
+                                <option value="20">Tarih</option>
+                                <option value="30">Bool</option>
+                                <option value="50">Liste Oluştur</option>
+                                <option value="60">Mevcut Veri</option>
+                                <option value="70">Bağlı Veri</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="VeriListe" class="form-label">Veri Listesi</label>
+                            <textarea id="VeriListe" name="VeriListe" class="form-control form-control-xs" rows="1"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="UstId" class="form-label">Bağlı Alan</label>
+                            <select id="UstId" name="UstId" class="form-control form-control-xs" tabindex="-1" aria-hidden="true">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="MinDeger" class="form-label">En Düşük Değer</label>
+                            <input type="text" id="MinDeger" name="MinDeger" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="MaxDeger" class="form-label">En Yüksek Değer</label>
+                            <input type="text" id="MaxDeger" name="MaxDeger" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="VarsayilanDeger" class="form-label">Varsayılan Değer</label>
+                            <input type="text" id="VarsayilanDeger" name="VarsayilanDeger" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="SatirSira" class="form-label">*Satır Sıra</label>
+                            <input type="number" id="SatirSira" name="SatirSira" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="SutunSira" class="form-label">*Sütun Sıra</label>
+                            <input type="number" id="SutunSira" name="SutunSira" class="form-control form-control-xs" data-fixedvalue="1" required />
+                        </div>
+                        <div class="col">
+                            <label for="SutunGenislik" class="form-label">*Sütun Genişlik</label>
+                            <input type="number" id="SutunGenislik" name="SutunGenislik" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="TabloSira" class="form-label">*Tablo Sıra</label>
+                            <input type="number" id="TabloSira" name="TabloSira" class="form-control form-control-xs" data-fixedvalue="1" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="Ipucu" class="form-label">İpucu</label>
+                            <input type="text" id="Ipucu" name="Ipucu" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="Tanimlayici" class="form-label">Tanımlayıcı</label>
+                            <input type="text" id="Tanimlayici" name="Tanimlayici" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="OzelStil" class="form-label">Özel Stil</label>
+                            <input type="text" id="OzelStil" name="OzelStil" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="Aciklama" class="form-label">Açıklama</label>
+                            <textarea id="Aciklama" name="Aciklama" class="form-control form-control-xs" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                Vazgeç
+            </button>
+            <button class="btn btn-primary" id="addRowBtn" type="button" data-role="save">
+                Kaydet
+            </button>
+        </div>
+    </div>
+</div>

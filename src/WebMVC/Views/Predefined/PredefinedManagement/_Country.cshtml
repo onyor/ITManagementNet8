@@ -1,0 +1,68 @@
+﻿<div class="row">
+    <div class="col">
+        <div class="table-responsive h-scrollbar-primary">
+            <table id="CountryTable" data-topButtons="add" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                <thead>
+                    <tr>
+                        <th col-data="Name" orderable>Ülke</th>
+                        <th col-data="Code" orderable>Ülke Kodu</th>
+                        <th col-data="CurrencyDefinitionIdSymbol" col-dynamic="Domain_" orderable>Para Birimi</th>
+                        <th col-data="PhoneCode" col-noSearchable orderable>Telefon Kodu</th>
+                        <th col-role="action" action-list="edit,delete">İşlemler</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="CountryModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Ülke Tanım Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="CountryForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">Ad</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="Code" class="form-label">Ülke Kodu</label>
+                            <input type="text" id="Code" name="Code" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="PhoneCode" class="form-label">Telefon Kodu</label>
+                            <input type="number" id="PhoneCode" name="PhoneCode" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="CurrencyDefinitionId" class="form-label">Döviz Tanımı</label>
+                            <select id="CurrencyDefinitionId" name="CurrencyDefinitionId" class="form-control form-control-xs" opt-sel2="true" data-type="static" source="Predefined/GetAll/CurrencyDefinition" data-text="kisaAd" data-value="id">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                <button class="btn btn-primary" data-role="save" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

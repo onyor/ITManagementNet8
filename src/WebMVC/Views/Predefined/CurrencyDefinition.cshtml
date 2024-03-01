@@ -1,0 +1,91 @@
+﻿@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Yönetim" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Döviz Tanım" }}
+        }
+    };
+}
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    <table id="CurrencyDefinitionTable" data-topButtons="add" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr>
+                                                <th col-data="Name" orderable>Ad</th>
+                                                <th col-data="ShortName">Kısa Ad</th>
+                                                <th col-data="Symbol">Sembol</th>
+                                                <th col-role="action" action-list="edit,delete">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="CurrencyDefinitionModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Para Birimi Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="CurrencyDefinitionForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">Ad</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="ShortName" class="form-label">Kısa Ad</label>
+                            <input type="text" id="ShortName" name="ShortName" class="form-control form-control-xs" required />
+                        </div>  
+                        <div class="col">
+                            <label for="Symbol" class="form-label">Sembol</label>
+                            <input type="text" id="Symbol" name="Symbol" class="form-control form-control-xs" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                <button class="btn btn-primary" data-role="save" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

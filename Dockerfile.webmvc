@@ -1,0 +1,25 @@
+# Base image for runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+# SDK image to build the project
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+COPY ["src/WebMVC/OCP.WebMVC.csproj", "src/WebMVC/"]
+# COPY ["src/Domain/OCP.Domain.csproj", "src/Domain/"]
+COPY ["src/Application/OCP.Application.csproj", "src/Application/"]
+COPY ["src/Infrastructure/OCP.Infrastructure.csproj", "src/Infrastructure/"]
+COPY ["src/Persistance/OCP.Persistance.csproj", "src/Persistance/"]
+
+COPY ["nuget.config", "./"]
+RUN dotnet restore "src/WebMVC/OCP.WebMVC.csproj"
+
+# Copy the source code and publish the application
+COPY ["src", "."]
+RUN dotnet publish "src/WebMVC/OCP.WebMVC.csproj" -c Release -o /app/publish
+
+# Final stage/image
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "OCP.WebMVC.dll"]

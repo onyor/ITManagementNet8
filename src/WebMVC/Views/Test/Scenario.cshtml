@@ -1,0 +1,191 @@
+@using ITX.WebMVC.Models
+@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+    {
+        "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+    },
+    {
+        "HasSub", new Dictionary<string, string> {{"jsonKey", "Test" }}
+    },
+    {
+        "ActivePage", new Dictionary<string, string> {{"jsonKey", "Scenario" }}
+    }
+};
+}
+
+@{
+    List<TableAuthorityViewModel> TableAuthorityList = new List<TableAuthorityViewModel>();
+    TableAuthorityList.Add(new TableAuthorityViewModel()
+            {
+                TableName = "Scenario",
+                ActionButtonList = new List<string> { "edit", "delete" },
+                TopButtonList = new List<string> { "add" },
+            });
+}
+
+@await Html.PartialAsync("_TableAuthority", TableAuthorityList);
+
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    @{
+                                        var ScenarioActionsString = TempData["ScenarioActionsString"] as string;
+                                        var ScenarioTopButtonsString = TempData["ScenarioTopButtonsString"] as string;
+                                    }
+                                    <table id="ScenarioTable" data-topButtons="@ScenarioTopButtonsString" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr>
+                                                <th col-data='Name' col-align='center'>Adı</th>
+                                                <th col-data='UlasimAracIdName' col-dynamic="Form_" col-align='center'>Ulaşım Aracı</th>
+                                                <th col-data='RequestLogTypeCodeIdName' col-dynamic="Enum_">Log Type</th>
+                                                <th col-data='GenderIdName' col-dynamic="Enum_">Cinsiyet</th>
+                                                <th col-data='TestDescription'>Description</th>
+                                                <th col-data='TestDeger' col-noSearchable col-align='center'>Değer</th>
+                                                <th col-data='TestBaslik'>Başlık</th>
+                                                <th col-data='CountryIdName' col-dynamic="Domain_" col-align='center'>Ülke Adı</th>
+                                                <th col-data='CityIdName' col-dynamic="Domain_" col-align='center'>Şehir Adı</th>
+                                                <th col-data='CurrencyDefinitionIdName' col-noSearchable col-dynamic="Domain_" col-align='center'>Döviz Adı</th>
+                                                <th col-data='TestTarih' col-noSearchable col-type='date'>Tarih</th>
+                                                @if (!string.IsNullOrEmpty(ScenarioActionsString))
+                                                {
+                                                    <th col-role="action" action-list="@ScenarioActionsString">İşlemler</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="ParamCity" class="form-label">Şehir For Param</label>
+                    <select id="ParamCity" name="CityId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Predefined/GetAll/City/@ViewBag.CountryId" data-text="name" data-value="id" opt-initialText>
+                    </select>
+                    <label for="ComboRefreshCity" class="form-label">Şehir For ComboRefresh</label>
+                    <select id="ComboRefreshCity" name="CityId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Predefined/GetAll/City" data-text="name" data-value="id" opt-initialText>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="ScenarioModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Test Entity Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="ScenarioForm">
+                    <input id="hdnDataId" name="Id" type="hidden" value="" data-id-type="number" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">Name</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="UlasimAracId" class="form-label">Ulaşım Aracı</label>
+                            <select id="UlasimAracId" name="UlasimAracId" class="form-control form-control-xs" opt-sel2="true" data-type="dynamic" data-text="Ad" data-value="Id" opt-initialText>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="GenderId" class="form-label">Cinsiyet</label>
+                            <select id="GenderId" name="GenderId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Forms/GetEnumList/Gender" data-text="ad" data-value="deger" opt-initialText>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="RequestLogTypeCodeId" class="form-label">Log Type</label>
+                            <select id="RequestLogTypeCodeId" name="RequestLogTypeCodeId" class="form-control form-control-xs" opt-sel2="true" data-type="static" source="Forms/GetEnumList/RequestLogTypeCode" data-text="ad" data-value="deger" opt-initialText>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="TestDescription" class="form-label">Açıklama</label>
+                            <input type="text" id="TestDescription" name="TestDescription" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="TestDeger" class="form-label">Değer</label>
+                            <input type="number" id="TestDeger" name="TestDeger" maxlength="11" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="TestBaslik" class="form-label">Başlık</label>
+                            <input type="text" id="TestBaslik" name="TestBaslik" class="form-control form-control-xs" />
+
+                        </div>
+                        <div class="col">
+                            <label for="CountryId" class="form-label">Ülke Adı</label>
+                            <select id="CountryId" name="CountryId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Predefined/GetAll/Country"
+                                    data-text="name"
+                                    data-value="id"
+                                    onchange="iTech.Forms.Helpers.ComboRefreshData(this, 'CityId');"
+                                    opt-initialText>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="TestTarih" class="form-label">Tarih</label>
+                            <input id="TestTarih" name="TestTarih" type="date" class="form-control form-control-xs flatpickr" />
+                        </div>
+                        <div class="col">
+                            <label for="CityId" class="form-label">Şehir Adı</label>
+                            <select id="CityId" name="CityId" class="form-control form-control-xs" opt-sel2="true"
+                                    source="Predefined/GetAll/City"
+                                    data-type="related" parent="CountryId"
+                                    data-text="name" data-value="id" opt-initialText>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="CurrencyDefinitionId" class="form-label">Döviz Birim</label>
+                            <select id="CurrencyDefinitionId" name="CurrencyDefinitionId" class="form-control form-control-xs" opt-sel2="true" source="Predefined/GetAll/CurrencyDefinition" data-type="static" data-text="name" data-value="id" opt-initialText>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                @if (User.HasClaim(c => c.Type == "Save" && c.Value == "True"))
+                {
+                    <button class="btn btn-primary" id="addRowBtn" data-role="save" type="button">
+                        Kaydet
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

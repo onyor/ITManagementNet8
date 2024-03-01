@@ -1,0 +1,162 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor;
+
+<header class="page-header" role="banner" style="background-color:#627ca0">
+    <!-- we need this logo when user switches to nav-function-top -->
+    <div class="page-logo">
+        <a href="~/Home/Advisor" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
+            <img src="~/app/images/gencsporbakanlik.png" alt="SmartAdmin WebApp" aria-roledescription="logo" />
+            <span class="page-logo-text mr-1">Psikososyal Destek Platformu</span>
+            <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+        </a>
+    </div>
+    <!-- DOC: nav menu layout change shortcut -->
+    <div class="hidden-md-down dropdown-icon-menu position-relative">
+        <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden" title="Hide Navigation">
+            <i class="ni ni-menu"></i>
+        </a>
+        <ul>
+            <li>
+                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                    <i class="ni ni-minify-nav"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-fixed" title="Lock Navigation">
+                    <i class="ni ni-lock-nav"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- DOC: mobile button appears during mobile width -->
+    <div class="hidden-lg-up">
+        <a href="#" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+            <i class="ni ni-menu"></i>
+        </a>
+    </div>
+    <div class="search d-none" id="headerSearch">
+        <input type="text" id="search-field" class="form-control" placeholder="Hızlı Arama" tabindex="1">
+        <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
+            <i class="fal fa-times"></i>
+        </a>
+    </div>
+    <div class="ml-auto d-flex">
+
+        <!-- dashboard -->
+        <!--Create Post Button -->
+        @* <div class="py-3 mr-2">
+        <button class="custom-btn btn-7" data-href="operation"><span>Gönderi Oluştur</span></button>
+        </div>*@
+
+        @*<div class="py-3">
+        <button class="custom-btn btn-11" data-href="orderdetail"><span>Gönderi Oluştur</span><div class="dot"></div></button>
+        </div>*@
+
+        @*<div>
+        <a id="homeButton" href="" class="header-icon pointer" data-class="mobile-nav-on">
+        <i class="ni ni-home"></i>
+        </a>
+        </div>*@
+
+        <!--app notification-->
+        <div class="fs-lg text-truncate text-truncate-lg userInfoName" style="margin: auto; color:white;"></div>
+
+        <div id="notification" class="pointer" style="display:none;">
+            <a href="#" class="header-icon" data-toggle="dropdown" title="You got 11 notifications">
+                <i class="fal fa-bell"></i>
+                <span class="badge badge-icon"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-animated dropdown-xl">
+                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top mb-2">
+                    <h4 class="m-0 text-center color-white">
+                        <span id="okunmamisTalep"> </span> Yeni
+                        <small class="mb-0 opacity-80">Bilgi Kartı Talepleri</small>
+                    </h4>
+                </div>
+                <div class="h-100" style="max-height:350px; overflow-y:auto;">
+                    <ul class="notification">
+                    </ul>
+                </div>
+                <div class="py-2 px-3 bg-faded d-block rounded-bottom text-right border-faded border-bottom-0 border-right-0 border-left-0 d-flex justify-content-between">
+                    <div>
+                        <span> Toplam Talep: </span>
+                        <span id="totalTalep">  </span>
+                    </div>
+                    <div>
+                        <a href="/KurumYonetim/BilgiTalep" class="fs-xs fw-500 ml-auto">Tüm Talepleri Görüntüle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*  <!-- roleList -->
+        <div class="roles">
+        <a class="header-icon pointer" data-toggle="dropdown" aria-expanded="false">
+        <i class="ni ni-users"></i>
+        </a>
+        <ul id="role-dropdown-menu" class="dropdown-menu"></ul>
+        </div>  *@
+
+        <!-- appLogin -->
+        @if (User.IsInRole("Uygulama Yöneticisi"))
+        {
+                <div class="hidden-md-down pointer">
+                <a href="#" onclick="AdviserPage.Helpers.RedirectAppAdmin('@Url.Action("LoginForRegionalManager", "Account")');" class="header-icon"  data-target=".js-modal-settings">
+                    <i class="fas fa-sign-in-alt text-white"></i>
+                </a>
+            </div>
+        }
+   
+        <!--app settings -->
+        <div class="hidden-md-down pointer d-none" id="headerSetting">
+            <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
+                <i class="fal fa-cog"></i>
+            </a>
+        </div>
+        <!-- app user menu -->
+        <div>
+            <a href="#" data-toggle="dropdown" class="header-icon d-flex align-items-center justify-content-center ml-2 pointer">
+                <img src="~/app/images/profil.jpg" class="profile-image rounded-circle bg-primary-300 border-faded border-secondary">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+                <div class="dropdown-header bg-primary d-flex flex-row py-4 rounded-top">
+                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                        <span class="mr-2">
+                            <img src="~/app/images/profil.jpg" class="rounded-circle profile-image">
+                        </span>
+                        <div class="info-card-text">
+                            <div class="fs-lg text-truncate text-truncate-lg userInfoName"></div>
+                            <div class="text-truncate text-truncate-md opacity-80 userInfoRole"></div>
+                            <span class="text-truncate text-truncate-md opacity-80 dormName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider m-0"></div>
+                <a href="@Url.Action("MyProfileInfo", "AdviseManagement")" class="dropdown-item">
+                    <i class="fal fa-user-cog mr-3 text-secondary"></i>
+                    <span>Bilgilerim</span>
+                </a>
+                <div class="dropdown-divider m-0"></div>
+                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                    <i class="far fa-expand-arrows mr-3 text-secondary"></i>
+                    <span>Tam Ekran</span>
+                    <i class="float-right text-primary fw-n ">F11</i>
+                </a>
+                <div class="dropdown-divider m-0"></div>
+                <a class="dropdown-item " onclick="iTech.User.Logout();" href="#">
+                    <i class="ni ni-logout mr-3 text-secondary"></i>
+                    <span> Çıkış</span>
+                </a>
+            </div>
+        </div>
+        <!-- logout -->
+        <div class="d-none">
+            <a id="js-logout" onclick="iTech.User.Logout();" href="#" data-class="mobile-nav-on" class="header-icon pointer">
+                <i class="ni ni-logout"></i>
+            </a>
+        </div>
+    </div>
+
+</header>
+
+
+

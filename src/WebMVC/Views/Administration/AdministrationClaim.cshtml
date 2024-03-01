@@ -1,0 +1,32 @@
+﻿<main id="js-page-content " role="main" class="page-content">
+    <div class="panel">
+        <div class="panel-container show">
+            <div class="panel-content">
+                <div class="demo-v-spacing">
+                    <ul class="nav  nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" data-js="administration/administrationclaim/_roleclaim" href="#RoleClaim-tab">
+                                <i class="fal fa-home text-success"></i>
+                                <span class="hidden-sm-down ml-1">Rol Hakları</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" data-js="administration/administrationclaim/_userclaim" href="#UserClaim-tab">
+                                <i class="fal fa-user text-primary"></i>
+                                <span class="hidden-sm-down ml-1">Kullanıcı Hakları</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content py-3">
+                        <div id="RoleClaim-tab" class="tab-pane fade show active" role="tabpanel">
+                            @await Html.PartialAsync("~/Views/Administration/AdministrationClaim/_RoleClaim.cshtml")
+                        </div>
+                        <div id="UserClaim-tab" class="tab-pane fade" role="tabpanel">
+                            @await Html.PartialAsync("~/Views/Administration/AdministrationClaim/_UserClaim.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-WebAPI",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/src/WebAPI/OCP.WebAPI.csproj"],
+      "group": "build"
+    },
+    {
+      "label": "build-WebMVC",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/src/WebMVC/OCP.WebMVC.csproj"],
+      "group": "build"
+    }
+  ]
+}

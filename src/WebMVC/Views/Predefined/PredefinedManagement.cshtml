@@ -1,0 +1,41 @@
+﻿<main id="js-page-content " role="main" class="page-content">
+    <div class="panel">
+        <div class="panel-container show">
+            <div class="panel-content">
+                <div class="demo-v-spacing">
+                    <ul class="nav  nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" data-js="predefined/predefinedmanagement/_country" href="#Country-tab">
+                                <i class="fal fa-home text-success"></i>
+                                <span class="hidden-sm-down ml-1">Ülke Tanim</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" data-js="predefined/predefinedmanagement/_city" href="#City-tab">
+                                <i class="fal fa-user text-primary"></i>
+                                <span class="hidden-sm-down ml-1">İl Tanım</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" data-js="predefined/predefinedmanagement/_district" href="#District-tab">
+                                <i class="fal fa-cog text-danger"></i>
+                                <span class="hidden-sm-down ml-1">İlçe Tanım</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content py-3">
+                        <div id="Country-tab" class="tab-pane fade show active" role="tabpanel">
+                            @await Html.PartialAsync("~/Views/Predefined/PredefinedManagement/_Country.cshtml")
+                        </div>
+                        <div id="City-tab" class="tab-pane fade" role="tabpanel">
+                            @await Html.PartialAsync("~/Views/Predefined/PredefinedManagement/_City.cshtml")
+                        </div>
+                        <div id="District-tab" class="tab-pane fade" role="tabpanel">
+                            @await Html.PartialAsync("~/Views/Predefined/PredefinedManagement/_District.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

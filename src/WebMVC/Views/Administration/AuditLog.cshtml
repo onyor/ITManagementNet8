@@ -1,0 +1,113 @@
+﻿@using ITX.WebMVC.Components
+@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Yönetim" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Log Takip" }}
+        }
+    };
+}
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="panel panel-locked" data-panel-zero='true'>
+                <div class="panel-hdr bg-primary-200 text-white">
+                    <h2>
+                        Log Takip
+                    </h2>
+                    <div class="panel-toolbar mr-2">
+                        <button class="btn btn-panel-collapse no-shadow" data-action="panel-collapse">
+                            <i class="fa fa-window-minimize text-white"></i>
+                        </button>
+                        <button class="btn btn-panel-collapse  no-shadow" data-action="panel-fullscreen">
+                            <i class="fa fa-arrows text-white"></i>
+                        </button>
+                    </div>
+                </div>
+                <form name="LogSorgulamaForm" autocomplete="off">
+                    <div class="panel-container collapse show">
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="CreatedAt" class="form-label">İşlem Tarihi</label>
+                                    <input type="date" id="CreatedAt1" name="CreatedAt" data-basTar class="form-control form-control-xs flatpickr" />
+                                </div>
+                                <div class="col">
+                                    <label></label>
+                                    <input type="date" id="CreatedAt2" name="CreatedAt" data-bitTar class="form-control form-control-xs flatpickr" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="Type" class="form-label">İşlem Tipi</label>
+                                    <select id="Type" name="Type" class="form-control form-control-xs" opt-sel2="true" source="Log/GetAll/Type" data-firstEmpty="true" data-type="static" data-text="value" data-value="key" opt-initialText>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="UserId" class="form-label d-flex">İşlemi Yapan</label>
+                                    <select id="UserId" name="UserId" class="form-control form-control-xs" opt-sel2="true" source="Identity/GetAll/User" data-type="static" data-text="fullname" data-value="id" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col p-1 d-flex justify-content-center">
+                                    <button id="btnSearch" type="button" class="btn bg-success-400 btn-pills text-white">
+                                        <i class="fa fa-search px-2" aria-hidden="true"></i>
+                                        Sorgula
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="TablePanel" class="panel" style="display:none;">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    <table id="AuditLogTable" data-topButtons="xls.pdf" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr role="row">
+                                                <th col-data="Id" orderable>Kayıt No</th>
+                                                <th col-data="TableName" orderable>Tablo Adı</th>
+                                                <th col-data="UserInfo" orderable>Kullanıcı Adı</th>
+                                                <th col-data="PrimaryKey" orderable>Anahtar Alan</th>
+                                                <th col-data="Type" orderable>İşlem Tipi</th>
+                                                <th col-data="OldValues" orderable>Eski Veri</th>
+                                                <th col-data="NewValues" orderable>Yeni Veri</th>
+                                                <th col-data="CreatedAt" data-nosearch orderable col-type="date">Oluşturulma Tarihi</th>
+                                                @* <th col-role="action" action-list="detail">İşlemler</th> *@
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+@await Component.InvokeAsync("LogDetailModal", new LogModel { DName = "AllLog", PName = "AuditLog" })

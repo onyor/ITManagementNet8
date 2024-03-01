@@ -1,0 +1,59 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <span id="modalCaption" class="form-span">Form Ekle/Güncelle</span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+            <span aria-hidden="true">
+                <i class="fal fa-times"></i>
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form name="FormTanimForm" autocomplete="off">
+            <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+            <div class="row">
+                <div class="col">
+                    <label for="Ad" class="form-label">Ad</label>
+                    <input type="text" id="Ad" name="Ad" class="form-control form-control-xs" required />
+                </div>
+                <div class="col">
+                    <label for="Baslik" class="form-label">Başlık</label>
+                    <input type="text" id="Baslik" name="Baslik" class="form-control form-control-xs" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="NormalizeAd" class="form-label">Sorgu Ad</label>
+                    <input type="text" id="NormalizeAd" name="NormalizeAd" class="form-control form-control-xs" required>
+                </div>
+                <div class="col switch-col">
+                    <div class="row">
+                        <div class="col">
+                            <label for="Statik" class="form-label mr-2">Statik Form</label>
+                            <div class="custom-control custom-switch" switch-text="Evet:Hayır">
+                                <input type="checkbox" id="Statik" name="Statik" class="custom-control-input" checked="">
+                                <label class="custom-control-label" for="Statik">Statik Form</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="Aciklama" class="form-label">Açıklama</label>
+                    <textarea id="Aciklama" name="Aciklama" class="form-control form-control-xs" rows="3"></textarea>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+            Vazgeç
+        </button>
+        <button class="btn btn-primary" id="addRowBtn" type="button" data-role="save">
+            Kaydet
+        </button>
+    </div>
+</div>

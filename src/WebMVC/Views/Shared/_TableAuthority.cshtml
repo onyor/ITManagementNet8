@@ -1,0 +1,38 @@
+﻿@using ITX.WebMVC.Models
+@{
+    List<TableAuthorityViewModel> TableAuthorityList = Model;
+}
+
+@{
+    foreach (var tableAuthority in Model)
+    {
+        var actions = new List<string>();
+        var topButtons = new List<string>();
+
+        foreach (var actionButton in tableAuthority.ActionButtonList)
+        {
+            if (User.HasClaim(c => c.Type.ToLower() == actionButton.ToLower() && c.Value == "True"))
+            {
+                actions.Add(actionButton);
+            }
+        } 
+        
+        foreach (var topButton in tableAuthority.TopButtonList)
+        {
+            if (User.HasClaim(c => c.Type.ToLower() == topButton.ToLower() && c.Value == "True"))
+            {
+                topButtons.Add(topButton);
+            }
+        }
+
+        var actionsString = string.Join(",", actions);
+        var topButtonsString = string.Join(".", topButtons);
+
+        var actionsKey = $"{tableAuthority.TableName}ActionsString";
+        var topButtonsKey = $"{tableAuthority.TableName}TopButtonsString";
+
+        TempData[actionsKey] = string.Join(",", actionsString);
+        TempData[topButtonsKey] = string.Join(".", topButtonsString);
+    }
+}
+

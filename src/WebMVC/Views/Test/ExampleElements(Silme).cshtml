@@ -1,0 +1,97 @@
+﻿<main id="js-page-content " role="main" class="page-content">
+    <div class="panel">
+        <div class="panel-container">
+            <div class="panel-content">
+                <form name="ExampleForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="0" data-id-type="number" />
+
+                    @* For Database-Domain // Select *@
+                    <div class="row row-grid no-gutters border-faded no-margin align-items-center">
+                        <div class="col p-1">
+                            <label for="SendikaTanimId" class="form-label">Sendikası</label>
+                        </div>
+                        <div class="col p-1">
+                            <select id="SendikaTanimId" name="SendikaTanimId" class="form-control form-control-xs" opt-sel2="false" data-firstEmpty="true" data-type="static" data-method="PersonelYonetim" data-action="GetAll" data-text="ad" data-value="id" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    @* // For Enum  // Select *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="EngelDereceId" class="form-label">Engelli</label>
+                        </div>
+                        <div class="col p-1">
+                            <select id="EngelDereceId" name="EngelDereceId" class="form-control form-control-xs" data-type="static" data-method="Predefined" data-action="GetEnumList" data-text="ad" data-value="deger" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    @* For Form // Select *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="EksikGunTanimId" class="form-label">SGK</label>
+                        </div>
+                        <div class="col p-1">
+                            <select id="EksikGunTanimId" name="EksikGunTanimId" class="form-control form-control-xs" tabindex="-1" aria-hidden="false" data-type="dynamic" opt-sel2="false" data-text="Kod,Nedeni" data-value="id" data-firstEmpty="true" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    @* For Checkbox // Checkbox *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="TahakkukaDahilMi" class="form-label">Tahakkuka?</label>
+                        </div>
+                        <div class="col p-1">
+                            <div class="custom-control custom-switch mt-1" switch-text="Evet:Hayır">
+                                <input type="checkbox" id="TahakkukaDahilMi" name="TahakkukaDahilMi" class="custom-control-input form-control-xs">
+                                <label for="TahakkukaDahilMi" class="custom-control-label" >Hayır</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Datetime *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="AyrilisTar" class="form-label">Kurumdan</label>
+                        </div>
+                        <div class="col p-1">
+                            <input type="date" id="AyrilisTar" name="AyrilisTar" class="form-control form-control-xs flatpickr" required />
+                        </div>
+                    </div>
+
+                    @* Textarea *@
+                    <div class="row align-items-center">
+                        <div class="col-2 p-1">
+                            <label for="EkNeden" class="form-label">Eklenme</label>
+                        </div>
+                        <div class="col-4 p-1">
+                            <textarea id="EkNeden" name="EkNeden" class="form-control form-control-xs" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    @* Normal Input (type="number") *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="YevmiyeUcret" class="form-label">Ücreti<small class="text-danger">(Yevmiye)</small></label>
+                        </div>
+                        <div class="col p-1">
+                            <input type="number" id="YevmiyeUcret" name="YevmiyeUcret" class="form-control form-control-xs" maxlength="11" />
+                        </div>
+                    </div>
+
+                    @* Normal Input (type="text") *@
+                    <div class="row align-items-center">
+                        <div class="col p-1">
+                            <label for="Iban" class="form-label">IBAN</label>
+                        </div>
+                        <div class="col p-1">
+                            <input type="text" id="IbanNo" name="IbanNo" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

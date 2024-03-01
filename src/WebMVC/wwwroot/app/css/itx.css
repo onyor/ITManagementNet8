@@ -1,0 +1,658 @@
+﻿
+#itech-loader {
+    background-color: #000000;
+    background-color: rgba(0,0,0,.2);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+    #itech-loader img {
+        animation: 1s sbb-anim infinite;
+        height: 100px;
+        width: 100px;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        position: fixed;
+    }
+
+/* Cursor */
+.addCursor:hover, .addCursor a:hover {
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.addCursor:active, .addCursor a:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+
+/* Panel */
+.panel {
+    margin-bottom: 0.70rem !important;
+    transition: box-shadow 0.3s ease;
+}
+
+    .panel:hover {
+        box-shadow: rgba(0, 0, 0, 0.7) 0px 8px 20px;
+    }
+/* Form */
+form .row {
+    margin-bottom: 8px;
+}
+
+.form-group {
+    color: #000;
+    margin-bottom: .4rem;
+}
+
+.form-span {
+    color: white;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: var(--theme-primary);
+}
+
+/* Modal Body */
+.modal-body {
+    overflow-y: auto;
+    max-height: 480px;
+}
+
+
+/* Modal Body ScrollBar Width */
+::-webkit-scrollbar {
+    height: 15px;
+    background-color: #F5F5F5;
+    border-radius: 100px;
+    width: 10px; /*turuncu*/
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 100px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+    background-color: #CCCCCC;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    /*background-color: #F90;*/ /*turuncu*/
+    background-color: #888;
+    background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+    border: 5px solid transparent;
+    border-radius: 100px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
+
+/* Form This is --> X at Open/Close */
+.close, .close:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 1px 0 #f1f4f7;
+}
+
+    close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+        color: white;
+    }
+
+/* Sidebar Sub Menu Black Line / White Dot */
+.mod-nav-link:not(.nav-function-top):not(.nav-function-minify):not(.mod-hide-nav-icons) ul.nav-menu:not(.nav-menu-compact) > li > ul:before {
+    border-left: 1px solid #0a0a0a;
+}
+
+.mod-nav-link:not(.nav-function-top):not(.nav-function-minify):not(.mod-hide-nav-icons) ul.nav-menu:not(.nav-menu-compact) > li > ul > li a:after {
+    background-color: white;
+    border: 1px solid white;
+}
+/* Sidebar Font-Awesome Icon Color and Font */
+.nav-menu li a > [class*='fa-'], .nav-menu li a > .ni, .nav-menu li a:hover > [class*='fa-'] {
+    color: white;
+    font-weight: 100;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    padding: 0.30rem 1rem !important;
+}
+
+    .breadcrumb > li.breadcrumb-item {
+        max-width: none !important;
+        white-space: inherit;
+        overflow: unset;
+        display: block;
+        font-size: 11pt;
+        font-weight: bold;
+        color: white;
+    }
+
+.breadcrumb-item span {
+    color: white;
+}
+
+li.breadcrumb-item + .breadcrumb-item::before {
+    content: "🡆";
+}
+
+/* Header RoleList */
+#role-dropdown-menu li a {
+    color: var(--theme-primary) !important;
+}
+
+#role-dropdown-menu li.selected, ul#role-dropdown-menu li .dropdown-item:hover, #role-dropdown-menu li.selected > a {
+    background: var(--theme-primary);
+    color: white !important;
+}
+
+select.mw-100 + .select2-container .select2-selection--multiple {
+    max-width: 100%;
+}
+
+.select2-container--open {
+    z-index: 9999999
+}
+
+.note-editor .note-editable {
+    line-height: 1 !important;
+}
+
+.form-control-xs {
+    height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.813rem;
+    font-size: 0.6875rem;
+}
+
+/* #region DATATABLE */
+
+table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+    right: 1rem !important;
+    content: "\f175";
+    font-size: 8px;
+    font-family: 'Font Awesome 5 Pro';
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+    right: 0.5rem !important;
+    content: "\f176";
+    font-size: 8px;
+    font-family: 'Font Awesome 5 Pro';
+}
+
+/* Table Row Width */
+table.table th, table.table td {
+    padding: 0.3rem;
+    vertical-align: middle;
+}
+
+table[data-fixedLeftColumns] td {
+    background-color: white !important;
+}
+
+/* Sabit sağ sütunlar için arkaplan rengini ayarlar */
+table[data-fixedRightColumns] td {
+    background-color: white !important;
+}
+
+table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
+    background: paleturquoise !important;
+}
+
+table.dataTable.hover tbody > tr.selected:hover, table.dataTable.hover tbody > tr > .selected:hover, table.dataTable.display tbody > tr.selected:hover, table.dataTable.display tbody > tr > .selected:hover, table.dataTable.hover tbody > tr.selected, table.dataTable.hover tbody > tr > .selected, table.dataTable.display tbody > tr.selected, table.dataTable.display tbody > tr > .selected {
+    background-color: rgb(2 113 208) !important;
+}
+
+.h-scrollbar-primary::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-color: var(--theme-secondary) !important;
+}
+
+table > thead th {
+    text-align: center;
+}
+
+table.dataTable.compact tbody td.select-checkbox:after, table.dataTable.compact tbody td.select-checkbox:before {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(0%,-50%);
+}
+
+table.dataTable.compact tbody td.select-checkbox:after {
+    margin-top: -10px !important;
+}
+
+table.dataTable.compact tbody td.select-checkbox:before {
+    margin-top: 0px !important;
+}
+
+.select-checkbox {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.selected div {
+    color: #fff;
+}
+
+th.dtfc-fixed-left, th.dtfc-fixed-right {
+    background: white !important;
+    z-index: 1;
+}
+
+.dataTables_wrapper > .row:nth-child(2) {
+    overflow-x: auto;
+}
+
+.DTFC_LeftHeadWrapper:before, .DTFC_LeftBodyWrapper:before, .DTFC_LeftFootWrapper:before {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Delete, Save Butonlar için hizalama*/
+/*.btn-form-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}*/
+
+/*Arama buton yüksekliği*/
+.btn-xs-turquoise {
+    height: calc(1.5em + 0.40rem + 2px);
+}
+
+
+.btn-form-xs {
+    height: calc(1.5em + 0.40rem + 2px);
+}
+
+
+.panel-toolbar .btn-panel-collapse {
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    opacity: 1;
+}
+
+.personelBilgi-hdr {
+    min-height: 0 !important;
+    max-height: 40px !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.bg-purple {
+    background-color: #6d3670;
+}
+
+.swal2-container {
+    z-index: 9999 !important;
+}
+
+/* Popuplarda Form ile Tablo arasındaki boşluk */
+.mt-10r {
+    margin-top: 10rem;
+}
+
+/* input customizations  */
+.readonly-item {
+    pointer-events: none;
+}
+
+
+/* #region number olanlarda yukarı aşağı ok'ları kaldırır. */
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+/* Firefox */
+input.hide-arrows {
+    -moz-appearance: textfield !important;
+}
+/* #endregion*/
+
+
+
+
+/* #region rapor Ekranları */
+.mh-200 {
+    min-height: 200px;
+}
+
+
+.nav-pills .nav-link.active:not(.sub-tab), .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: var(--theme-primary-700);
+}
+
+.nav-pills .nav-link.active.sub-tab, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: var(--theme-success-700);
+}
+/* #endregion*/
+
+
+input.flatpickr {
+    /*width:120px !important;*/
+}
+
+select,
+span.select2-selection.select2-selection--multiple {
+    /*border: solid !important;
+    border-width: 1px !important;*/
+    /*max-width: 250px;*/
+}
+
+input.select2-search__field {
+    border: 0 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: initial;
+    padding: 3px 0.813rem;
+    font-size: 0.6875rem;
+}
+
+.select2-container .select2-selection--single, select {
+    height: 26.5px;
+    padding: 0.25rem 0.813rem;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #868e96;
+    color: #fff;
+    font-size: 0.6875rem;
+}
+
+.select2-results__option[aria-selected] {
+    font-size: 0.6875rem;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+
+
+.row-grid label {
+    margin-bottom: 0 !important;
+}
+
+
+.row-grid > .col:before, .row-grid > [class^="col-"]:before, .row-grid > [class*=" col-"]:before, .row-grid > [class^="col "]:before, .row-grid > [class*=" col "]:before, .row-grid > [class$=" col"]:before, .row-grid > [class="col"]:before {
+    border-top: 0;
+}
+
+.row-grid > .col:after, .row-grid > [class^="col-"]:after, .row-grid > [class*=" col-"]:after, .row-grid > [class^="col "]:after, .row-grid > [class*=" col "]:after, .row-grid > [class$=" col"]:after, .row-grid > [class="col"]:after {
+    top: -8px;
+    bottom: -8px;
+}
+
+.custom-switch .custom-control-label::before {
+    /*top: 0.25rem !important;*/
+}
+
+.custom-switch .custom-control-label::after {
+    /*top: calc(0.03469rem + 4px + 0.2rem);*/
+}
+
+.switch-col {
+    display: flex;
+    align-items: flex-end;
+}
+
+.bg-indigo {
+    background-color: var(--indigo);
+    border: 1px solid white;
+}
+
+ul[role='tablist'] .nav-link {
+    padding: .25rem .5625rem;
+}
+
+span.select2-selection.select2-selection--single, span.select2-selection.select2-selection--multiple {
+    padding-left: 0;
+}
+
+.custom-select {
+    padding: 0.25rem 1.875rem 0.25rem 0.4375rem;
+}
+
+.shadow-inset-1, .shadow-hover-inset-1:hover {
+    box-shadow: none;
+}
+
+.btn-slim {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 25px 2px 20px;
+}
+
+input:invalid, input:invalid:focus, select:invalid, select:invalid:focus, textarea:invalid, textarea:invalid:focus {
+    border: 1px solid red;
+}
+
+.form-control:focus {
+    background: rgb(209 232 255 / 75%);
+    color: black;
+    font-weight: 100;
+}
+
+#region flatpickr hacks
+.flatpickr-day.endRange, .flatpickr-day.endRange.inRange, .flatpickr-day.endRange.nextMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.endRange:focus, .flatpickr-day.endRange:hover, .flatpickr-day.selected, .flatpickr-day.selected.inRange, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.selected:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.startRange.inRange, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.startRange:focus, .flatpickr-day.startRange:hover {
+    background: var(--success);
+    border-color: transparent;
+}
+
+span.flatpickr-weekday {
+    font-size: 12px;
+    padding: 4px 0;
+    background: var(--theme-primary-900);
+    color: #fff;
+    font-weight: 100;
+}
+
+.flatpickr-calendar, .flatpickr-current-month .flatpickr-monthDropdown-months, .flatpickr-months .flatpickr-month {
+    background: #0e7cd5;
+}
+
+.flatpickr-day.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day.nextMonthDay:focus, .flatpickr-day.nextMonthDay:hover, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.today.inRange, .flatpickr-day:focus, .flatpickr-day:hover {
+    background: var(--theme-primary-900);
+    border: none;
+}
+
+/* #region grid görünümü için */
+/* NO BORDER X  demek. x ekseni üzerinde border yok */
+.nbx > div.row-grid {
+    border-right: 0 !important;
+    border-left: 0 !important;
+}
+
+    .nbx > div.row-grid:last-child {
+        border-bottom: 0 !important;
+    }
+
+/* #endregion */
+
+
+.fw-thin {
+    font-weight: 100 !important;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.form-label {
+    margin-bottom: 0px;
+}
+
+@page {
+    size: A4;
+    margin: 0px;
+}
+
+@media print {
+
+    html, body {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+
+    .pagebreak {
+        page-break-before: always;
+    }
+
+    .noprint {
+        display: none;
+    }
+
+    .col-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .break-after {
+        display: block;
+        page-break-after: always;
+        position: relative;
+    }
+
+    .break-before {
+        display: block;
+        page-break-before: always;
+        position: relative;
+    }
+}
+
+[data-authority] {
+    display: none !important;
+}
+
+.dBlock {
+    display: block !important;
+}
+
+.form-area {
+    margin-top: 24px;
+    border: 1px solid darkblue;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+    .form-area > h1 {
+        margin: -20px 0px -1px 7px;
+        background-color: white;
+        width: 188px;
+        text-align: center;
+    }
+
+    .form-area > h2 {
+        margin: -18px 0px -1px 7px;
+        background-color: white;
+        width: 120px;
+        text-align: center;
+    }
+
+.form-card {
+    margin-top: 10px;
+    border: 2px solid gainsboro;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+#smartwizard .form-area > .row {
+    margin-bottom: 30px;
+}
+
+.radio-circle::after {
+    content: "";
+    position: absolute;
+    display: none;
+    border-radius: 50%;
+    background: #4caf50;
+}
+
+.custom-radio {
+    position: relative;
+    cursor: pointer;
+    /*line-height: 1rem;*/
+}
+
+    .custom-radio input[type="radio"] {
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.radio-circle {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    line-height: 18px;
+    display: inline-block;
+    padding: 0.7rem;
+}
+
+.custom-radio input[type="radio"]:checked + .radio-circle {
+    border: 2px solid #4caf50;
+    padding: 0.3rem;
+}
+
+.radio-circle .checkmark {
+    display: none;
+    color: rgba(0,0,0,0.6);
+    vertical-align: text-top;
+    font-size: 1rem;
+}
+
+.custom-radio input[type="radio"]:checked + .radio-circle .checkmark {
+    display: inline-block;
+}
+
+
+.subScale {
+    padding-right: 20px; /* Sağ tarafa boşluk bırakır */
+}
+
+    .subScale::before {
+        content: '';
+        display: block;
+        width: 100%; /* Çizginin genişliği - Container'ın genişliğine eşit */
+        height: 2px; /* Çizginin kalınlığı */
+        background-color: black; /* Çizginin rengi */
+        margin-bottom: 10px; /* Çizgi ile öğe arasındaki boşluk */
+    }
+
+.highlighted-row {
+    color: white;
+    background: #a41d34 !important;
+}
+
+    .highlighted-row:hover {
+        color: #bbb9b9 !important;
+    }
+
+.question-column {
+    overflow: hidden;
+    max-width: 55vw;
+    word-wrap: break-word;
+    white-space: normal;
+}

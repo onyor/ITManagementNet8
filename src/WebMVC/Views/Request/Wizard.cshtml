@@ -1,0 +1,229 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Request/Main.cshtml";
+}
+<style>
+    .icon-cell {
+        width: 1%
+    }
+
+    .survey-table {
+        width: 100%;
+    }
+
+        .survey-table td input[type="radio"] {
+            display: none;
+        }
+
+    .select2-container--default .select2-results > .select2-results__options {
+        max-height: 55vh;
+    }
+
+    .survey-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .survey-table th, .survey-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .survey-table .question-cell {
+            font-weight: bold;
+        }
+
+        .survey-table .choice-cell {
+            text-align: center;
+        }
+
+
+    .choice-label {
+        display: block;
+    }
+
+    label {
+        display: flex;
+        margin-bottom: 0px !important;
+    }
+
+    .custom-radio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .custom-card {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        overflow: auto;
+        transition: box-shadow 0.3s ease;
+        border-radius: 5px;
+    }
+
+        .custom-card:hover {
+            box-shadow: rgba(0, 0, 0, 0.7) 0px 8px 20px;
+        }
+
+    .panel {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        overflow: auto;
+        transition: box-shadow 0.3s ease;
+        border-radius: 5px;
+    }
+
+        .panel:hover {
+            box-shadow: rgba(0, 0, 0, 0.7) 0px 8px 20px;
+        }
+
+    .card-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .module-card {
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border: 1px solid #2196F3;
+        border-radius: 10px;
+    }
+
+    @@media (max-width: 992px) {
+        .custom-card {
+            margin: 10px;
+        }
+
+        .nameClass {
+            font-size: 1.2rem !important;
+        }
+
+        .descClass {
+            font-size: 0.8rem !important;
+        }
+
+        .page-logo-text {
+            font-size: 1.3rem !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+    }
+
+    .iframe-row {
+        height: 50vh;
+        width: 100%;
+        margin: 0;
+        padding: 5px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        overflow: auto;
+        transition: box-shadow 0.3s ease;
+        border-radius: 5px;
+    }
+
+    iframe-container {
+        position: relative;
+        overflow: hidden;
+        /*padding-top: 56.25%; */
+    }
+
+    .responsive-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+
+<main id="js-page-content" role="main" class="page-content p-0 d-flex justify-content-center" style="margin-top: 3rem;">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-item-center ">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 card custom-card moduleDiv mx-auto p-0 mr-3 ml-3" style="height: fit-content;">
+                <div class="module m-3">
+                </div>
+            </div>
+            <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-12 col-sm-12 mx-auto">
+                <div class="panel panel-default">
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <!-- SmartWizard html -->
+                            <div id="smartwizard">
+                                <ul class="nav nav-progress appendListSteps">
+
+                                    <li class="nav-item step1">
+                                        <a class="nav-link" href="#step-1">
+                                            Talep Nedeni
+                                        </a>
+                                    </li>
+
+                                    @* <li class="nav-item step2">
+                                    <a class="nav-link" href="#step-2">
+                                    <span class="num">1</span>
+                                    Aşama
+                                    </a>
+                                    </li>
+
+                                    <li class="nav-item step3">
+                                    <a class="nav-link" href="#step-3">
+                                    <span class="num">2</span>
+                                    Aşama
+                                    </a>
+                                    </li>
+
+                                    <li class="nav-item step4">
+                                    <a class="nav-link " href="#step-4">
+                                    <span class="num">3</span>
+                                    Aşama
+                                    </a>
+                                    </li> *@
+
+
+                                </ul>
+
+                                <div class="tab-content formSteps" style="height: 71vh; overflow-y:auto;">
+                                    <div id="step-1" class="tab-pane p-0" role="tabpanel" aria-labelledby="step-1">
+                                        <div class="row">
+                                            <div class="col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-11 mx-auto mt-3 mb-3 ">
+                                                <form id="form-0" name="FirstStepForm" class="needs-validation" autocomplete="off">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="RequestReason" class="form-label">Talep Nedeni</label>
+                                                            <select id="RequestReason" name="RequestReason" class="form-control form-control-xs " opt-sel2="true" data-type="static" source="AdminManagement/GetAll/RequestReasonClient" data-param="@ViewBag.RequestTypeId" data-text="name" data-value="id" opt-initialText required>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12 otherRequestReasonArea" style="display:none">
+                                                            <label for="OtherRequestReason" class="form-label">Açıklama</label>
+                                                            <textarea id="OtherRequestReason" name="OtherRequestReason" class="form-control form-control-xs" rows="5" maxlength="50"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*  <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                                    <form id="form-1" name="SecondStepForm" class="needs-validation" autocomplete="off">
+                                    </form>
+                                    </div>
+                                    <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3" >
+                                    <form id="form-2" name="ThirdStepForm" class="needs-validation" autocomplete="off">
+                                    </form>
+                                    </div>
+                                    <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                                    <form id="form-3" name="FourStepForm" class="needs-validation" autocomplete="off">
+                                    </form>
+                                    </div> *@
+                                </div>
+
+                                <!-- Include optional progressbar HTML -->
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

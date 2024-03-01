@@ -1,0 +1,4 @@
+﻿namespace ITX.Application.ViewModels
+{
+
+}

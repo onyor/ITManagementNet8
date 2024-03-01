@@ -1,0 +1,158 @@
+﻿<style type="text/css">
+
+    @@media print {
+        .table-panel {
+            display: none;
+        }
+
+        .print-button {
+            display: none;
+        }
+
+        .pieRow {
+            page-break-inside: avoid; /* Bir elementin içinde sayfa değişikliği olmasını önler */
+            break-inside: avoid; /* CSS3 versiyonu, bazı tarayıcılarda gerekli olabilir */
+        }
+
+        .canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+
+    .trueBadge {
+        background-color: #37e2d0;
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .falseBadge {
+        background-color: #51adf6;
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .print-button {
+        position: fixed !important;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .canvas {
+        width: 50% !important;
+        height: 50% !important;
+    }
+</style>
+<main id="js-page-content " role="main" class="page-content">
+    <div class="panel table-panel">
+        <div class="panel-container show">
+            <div class="panel-content">
+                <form name="GeneralReportsSearchForm" autocomplete="off">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="UlasimAracId" class="form-label">Ulaşım Aracı</label>
+                                </div>
+                                <div class="col">
+                                    <select id="UlasimAracId" name="UlasimAracId" class="form-control form-control-xs" opt-sel2="true" data-type="dynamic" data-text="Ad" data-value="Kod" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="DateMin" class="form-label">TestTarih</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="date" id="DateMin" data-basTar name="TestTarih" class="form-control form-control-xs flatpickr" placeholder="gg.aa.yyyy" />
+                                </div>
+                                <div class="col-3">
+                                    <input type="date" id="DateMax" data-bitTar name="TestTarih" class="form-control form-control-xs flatpickr" placeholder="gg.aa.yyyy" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="GenderId" class="form-label">Cinsiyet</label>
+                                </div>
+                                <div class="col">
+                                    <select id="GenderId" name="GenderId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Forms/GetEnumList/Gender" data-text="ad" data-value="deger" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="CountryId" class="form-label">Ülke Adı</label>
+                                </div>
+                                <div class="col">
+                                    <select id="CountryId" name="CountryId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Predefined/GetAll/Country" data-text="name" data-value="id" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="CurrencyDefinitionId" class="form-label">Döviz Birim</label>
+                                </div>
+                                <div class="col">
+                                    <select id="CurrencyDefinitionId" name="CurrencyDefinitionId" class="form-control form-control-xs" opt-sel2="true" source="Predefined/GetAll/CurrencyDefinition" data-type="static" data-text="name" data-value="id" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="RequestLogTypeCodeId" class="form-label">Log Type</label>
+                                </div>
+                                <div class="col">
+                                    <select id="RequestLogTypeCodeId" name="RequestLogTypeCodeId" class="form-control form-control-xs" opt-sel2="true" data-type="static" source="Forms/GetEnumList/RequestLogTypeCode" data-text="ad" data-value="deger" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="CityId" class="form-label">Öğrencinin Şehiri</label>
+                                </div>
+                                <div class="col">
+                                    <select id="CityId" name="Students.CityId" class="form-control form-control-xs" data-type="static" data-searchType="child" opt-sel2="true" source="Predefined/GetAll/City" data-text="name" data-value="id" opt-initialText>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel table-panel">
+        <div class="panel-container show">
+            <div class="panel-content">
+                <div class="demo-v-spacing">
+                    <div class="table-responsive h-scrollbar-primary">
+                        <table id="GeneralReportTable" data-topButtons="xls.pdf" data-mask="l B i p" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                            <thead>
+                                <tr role="row">
+                                    <th col-data='Name'>Adı</th>
+                                    <th col-data='UlasimAracIdName' col-align='center'>Ulaşım Aracı</th>
+                                    <th col-data='RequestLogTypeCodeIdName'>Log Type</th>
+                                    <th col-data='GenderIdName'>Cinsiyet</th>
+                                    <th col-data='TestDescription'>Description</th>
+                                    <th col-data='TestDeger' col-align='center'>Değer</th>
+                                    <th col-data='TestBaslik'>Başlık</th>
+                                    <th col-data='CountryIdName' col-align='center'>Ülke Adı</th>
+                                    <th col-data='CityIdName' col-align='center'>Şehir Adı</th>
+                                    <th col-data='CurrencyDefinitionIdName' col-align='center'>Döviz Adı</th>
+                                    <th col-data='TestTarih' col-type='date'>Tarih</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,202 @@
+[
+  {
+    "requestReason": "Diğer",
+    "undefined": "1",
+    "low": "3",
+    "normal": "2",
+    "high": "0",
+    "total": "8"
+  },
+  {
+    "requestReason": "Şehre Uyum Problemi",
+    "undefined": "0",
+    "low": "0",
+    "normal": "1",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Kayıp ve Yas Süreci",
+    "undefined": "0",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Stres Yönetimi Problemi",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Öfke Yönetimi Problemi",
+    "undefined": "0",
+    "low": "0",
+    "normal": "1",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Yurt Ortamına Uyum Problemi",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Cinsel Sağlık Kaynaklı Olumsuz Duygudurum",
+    "undefined": "0",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Akademik Başarı Kaygısı",
+    "undefined": "1",
+    "low": "1",
+    "normal": "1",
+    "high": "1",
+    "total": "6"
+  },
+  {
+    "requestReason": "Başarısızlık Korkusu",
+    "undefined": "0",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "2"
+  },
+  {
+    "requestReason": "Geçmişte Yaşanan Zorlayıcı Olaylar",
+    "undefined": "4",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "4"
+  },
+  {
+    "requestReason": "Dikkat Eksikliği",
+    "undefined": "0",
+    "low": "0",
+    "normal": "0",
+    "high": "1",
+    "total": "1"
+  },
+  {
+    "requestReason": "Dijital Oyunlardan Uzaklaşma İhtiyacı",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Alkol Kullanımı Kaynaklı Destek İhtiyacı",
+    "undefined": "0",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Kişiler Arası İlişkilerde Problem",
+    "undefined": "0",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Duygudurum Değişiklikleri",
+    "undefined": "0",
+    "low": "2",
+    "normal": "2",
+    "high": "0",
+    "total": "4"
+  },
+  {
+    "requestReason": "Kendini Tanıma Süreci",
+    "undefined": "1",
+    "low": "2",
+    "normal": "1",
+    "high": "0",
+    "total": "5"
+  },
+  {
+    "requestReason": "Sosyal Becerilerin Geliştirilmesi İhtiyacı",
+    "undefined": "0",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Problem Çözme Becerileri",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Erkek / Kız Arkadaşla İlişki Problemi",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Aile Özlemi",
+    "undefined": "0",
+    "low": "2",
+    "normal": "1",
+    "high": "0",
+    "total": "4"
+  },
+  {
+    "requestReason": "Sosyal Dışlanma",
+    "undefined": "0",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Deprem Korkusu",
+    "undefined": "1",
+    "low": "1",
+    "normal": "0",
+    "high": "0",
+    "total": "3"
+  },
+  {
+    "requestReason": "Kaygı",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "1",
+    "total": "3"
+  },
+  {
+    "requestReason": "Gelecek Kaygısı",
+    "undefined": "1",
+    "low": "0",
+    "normal": "0",
+    "high": "0",
+    "total": "1"
+  },
+  {
+    "requestReason": "Panik Atak",
+    "undefined": "0",
+    "low": "2",
+    "normal": "0",
+    "high": "0",
+    "total": "2"
+  }
+]

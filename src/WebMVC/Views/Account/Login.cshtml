@@ -1,0 +1,521 @@
+﻿@model ITX.WebMVC.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "Shared/_AccountLayout.cshtml";
+}
+
+<style type="text/css">
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+    .canvas-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .card {
+        cursor: pointer;
+        /*width: 400px;*/
+        height: auto;
+        transition: box-shadow 0.3s ease;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+        .card:hover {
+            box-shadow: rgba(0, 0, 0, 0.7) 0px 8px 20px;
+        }
+
+    .cardSectionRow {
+        align-items: center;
+    }
+
+        .cardSectionRow .card {
+            height: 30vh !important; /* Kartın maksimum yüksekliği 90vh olacak. */
+            transition: all 0.3s ease-in-out; /* Pürüzsüz geçiş efekti için. */
+        }
+
+    a[target]:not(.btn) {
+        text-decoration: none !important;
+    }
+
+
+    @@media (max-width: 1200px) {
+        p {
+            font-size: 1rem !important;
+        }
+
+        .cardSectionRow .card {
+            height: auto !important;
+        }
+    }
+
+    @@media (max-width: 992px) {
+        #cardSection {
+            height: 100vh;
+            overflow: auto;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        /* img {
+                    max-width: 30% !important;
+                } */
+
+        .align-items-center {
+            align-items: normal !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+    }
+
+    .customMaterialLi {
+        cursor: pointer;
+    }
+
+    .wrap-carousel {
+        padding-right: 2rem;
+        max-height: 13rem;
+        min-height: 13rem;
+    }
+
+        .wrap-carousel .carousel-inner {
+            max-height: 30rem;
+            overflow-y: auto;
+        }
+
+        .wrap-carousel .header {
+            font-size: 1rem;
+        }
+
+        .wrap-carousel .carousel-indicators {
+            background: #181818;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: unset !important;
+        }
+
+    #cardSection .card {
+        border-radius: 20px;
+    }
+
+        #cardSection .card .card-body .col {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+        }
+
+    #loginSection {
+        border-radius: 20px;
+        background-color: rgb(255 255 255 / 40%);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        height: 100vh;
+    }
+
+    .psychoSupportCard {
+        background-color: rgb(255 255 255 / 40%);
+        cursor: default;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .materialListGroup {
+        /* height: 30vh !important; */
+        overflow-y: auto;
+    }
+
+    .list-group {
+        border-radius: 20px;
+        /* height: 30vh !important; */
+        justify-content: center;
+    }
+
+    .list-group-item {
+        background-color: #2223ee;
+        border: none;
+    }
+
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-left-color: #ffffff;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .scrollable-div::-webkit-scrollbar {
+        display: none; /* Webkit tarayıcılar için scroll çubuğunu gizler */
+    }
+
+    .scrollable-div {
+        -ms-overflow-style: none; /* Internet Explorer ve Edge için */
+        scrollbar-width: none; /* Firefox için */
+        overflow-y: scroll; /* Dikey kaydırma aktif ama çubuk gizli */
+    }
+
+    #cardSection .card {
+        display:flex;
+        justify-content:center;
+    }
+</style>
+
+<div id="back">
+    <canvas id="canvas" class="canvas-back"></canvas>
+</div>
+
+<div class="container-fluid" style="height:auto; overflow:auto;">
+    <div class="row justify-content-center" style="height: 100%;">
+        <div id="loginSection" class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 border-right"
+             style="@(ViewData.ModelState.IsValid ? "display:none" : "");">
+            <div class="offset-1 col-10 mt-5">
+                <button class="closeLoginSection mt-5 mb-5 offset-11">
+                    <i class="fas fa-backward" style="font-size: 1.3rem;"></i>
+                </button>
+
+                <div class="col mt-3 mb-3 login200-form-title">
+                    <div class="row justify-content-center align-items-center">
+                        <img src="~/app/images/gencsporbakanlik.png" style="max-width:50%" alt="Gençlik ve Spor Bakanlığı" aria-roledescription="logo" />
+                    </div>
+                    <hr style="border-bottom: 1px solid #e5e5e5;" />
+                    <div class="row justify-content-center align-items-center mt-3">
+                        <span style="color: #5e5e5e;font-weight:700;font-size:18px;font-family: 'Montserrat-Bold';">Yönetim Portalı</span>
+                    </div>
+                </div>
+
+                <form id="LoginForm" name="LoginForm" class="login200-form validate-form" action="/Account/Login" method="post">
+                    @* <div class="wrap-input100 validate-input" data-validate="Kullanıcı Adı Gerekli"> *@
+                    <div class="wrap-input100">
+                        <input id="userName" class="input100" type="text" name="UserName" placeholder="Kullanıcı Adı">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+
+                    @* <div class="wrap-input100 validate-input" data-validate="Şifre gerekli"> *@
+                    <div class="wrap-input100">
+                        <input id="password" class="input100" type="password" name="Password" placeholder="Parola" autocomplete="current-password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="wrap-input100">
+                        <input id="CitizenNo" class="input100" type="text" name="CitizenNo" placeholder="T.C. Kimlik No">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-sign-in-alt" aria-hidden="true"></i>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.CitizenNo, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button id="loginBtn" type="submit" data-toggle="tooltip" class="login100-form-btn ajax-block">
+                            GİRİŞ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="cardSection" class="col-xxl-9 col-xl-9 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center loginClose">
+            <div class="row cardSectionRow">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 offset-lg-3 mt-3 mb-2">
+                    <div class="card psychoSupportCard">
+                        <div class="row text-center">
+                            <div class="col-12 justify-space-between">
+                                <div class="row d-flex">
+                                    <div class="col mb-2">
+                                        <img src="~/app/images/gencsporbakanlik.png" style="width: 100px;" alt="Gençlik ve Spor Bakanlığı" aria-roledescription="logo" />
+                                    </div>
+                                   @*  <div class="col mb-2">
+                                        <img src="~/app/images/gencsporbakanlik.png" style="width: 100px;" alt="Gençlik ve Spor Bakanlığı" aria-roledescription="logo" />
+                                    </div> *@
+                                </div>
+                                <div class="row d-flex">
+                                    <div class="col">
+                                        <p style="font-size: 1.3rem; color:red;">
+                                            <span style=" font-weight:600">Psikososyal Destek Platformu</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <a href="javascript:void(0);" onclick="LoginPage.Helpers.OpenEDevletLogin();">
+                        <div class="card" style="background-color: red; ">
+                            <div class="card-body">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <img src="~/app/images/e-devlet_logo.png" style="width: 15vh;" alt="e-Devlet Logo">
+                                    </div>
+                                    <div class="row">
+                                        <p style="font-size: 1.3rem; color:white">Uygulama Girişi</p>
+                                    </div>
+                                    <div class="row">
+                                        <span style="font-size: 0.7rem; color:white">* e-Devlet şifreniz ile giriş yapabilirsiniz.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <a href="javascript:void(0);" onclick="LoginPage.Helpers.OpenEDevletLogin(true);">
+                        <div class="card" style="background-color: #8f0000;">
+                            <div class="card-body">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <img src="~/app/images/e-devlet_logo.png" style="width: 15vh;" alt="e-Devlet Logo">
+                                    </div>
+                                    <div class="row">
+                                        <p style="font-size: 1.3rem; color:white">Velayet Girişi</p>
+                                    </div>
+                                    <div class="row">
+                                        <span style="font-size: 0.7rem; color:white">* Velayet sahibi olduğunuz vatandaşın adına işlem yapabilirsiniz. <br>* e-Devlet şifreniz ile giriş yapabilirsiniz.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <div class="card openLoginSection" style="background-color: rgb(56, 179, 174);">
+                        <div class="card-body text-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <img src="~/app/images/userLogin.png" style="width: 15vh;" alt="Personel Giriş">
+                                </div>
+                                <div class="row">
+                                    <p style="font-size: 1.3rem;color:white">Personel Girişi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <div class="card" style="background-color: #ee7d22;">
+                        <div class="row ">
+                            <div class="col-lg-3 col-md-3 col-sm-3 d-flex align-items-center">
+                                <div class="card-body text-center" style="z-index: 2;">
+                                    <img src="~/app/images/materyaller.png" style="width: 10vh;" alt="Destek Materyalleri">
+                                    <p style="font-size: 1.1rem;color:white;">Destek Materyalleri</p>
+                                </div>
+                            </div>
+                            <div class="materialDiv col-lg-8 col-md-8 col-sm-8">
+                                <ul class="list-group materialListGroup" >
+                                </ul>
+                                <div class="spinner-border" role="status" 
+                                    style="
+                                        width:  3rem !important;
+                                        height: 3rem !important;
+                                        position: absolute;
+                                        left: 40%;
+                                        top: 40%;
+                                        color: white;
+                                    ">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <div class="card sssBtn" style="background-color: #a169e7; ">
+                        <div class="card-body text-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <img src="~/app/images/soru.png" style="width: 15vh;" alt="SSS">
+                                </div>
+                                <div class="row">
+                                    <p style="font-size: 1.3rem; color:white">Sıkça Sorulan <br>Sorular</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <div class="card" style="background-color: #2223ee; cursor: default;">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 d-flex align-items-center">
+                                <div class="card-body text-center">
+                                    <img src="~/app/images/telefon.png" style="width: 10vh;" alt="İletişim">
+                                    <p style="font-size: 1.3rem;color:white;">İletişim</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 ">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-white text-center">İletişim: <br><a href="" id="KurumTelefon" class="font-weight-bold text-white">-</a></li>
+                                    <li type="email" class="list-group-item text-white text-center">E-Posta: <br><a href="" id="KurumEposta" class="font-weight-bold text-white">-</a></li>
+                                    <li class="list-group-item text-white text-center openMapModal" style="cursor:pointer">Adres: <br><span id="KurumAdres" class="font-weight-bold">-</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="MapModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span h5">Adres</span>
+                </h5>
+                <button type="button" class="close closeModal text-white" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe src="" id="KurumMapLink" style="border:0;width: -webkit-fill-available;height: 60vh;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            @*<div class="modal-footer">*@
+            @*<button class="btn btn-dark closeModal" data-content="remove" data-dismiss="modal" type="button">
+            İptal
+            </button>
+            @*</div>*@
+        </div>
+    </div>
+</div>
+
+
+@*<div id="slideBox" style="margin-left: 0px;">
+    <div class="topLayer" style="margin-left: 100%;">*@
+@*<div class="m-t-0">
+    <img src="~/app/images/gencsporbakanlik.png" width="100" height="100" alt="Gençlik ve Spor Bakanlığı" aria-roledescription="logo" />
+    </div>*@
+
+
+@*    </div>
+    </div>*@
+
+<!-- BEGIN Color profile -->
+<!-- this area is hidden and will not be seen on screens or screen readers -->
+<!-- we use this only for CSS color refernce for JS stuff -->
+<p id="js-color-profile" class="d-none">
+    <span class="color-primary-50"></span>
+    <span class="color-primary-100"></span>
+    <span class="color-primary-200"></span>
+    <span class="color-primary-300"></span>
+    <span class="color-primary-400"></span>
+    <span class="color-primary-500"></span>
+    <span class="color-primary-600"></span>
+    <span class="color-primary-700"></span>
+    <span class="color-primary-800"></span>
+    <span class="color-primary-900"></span>
+    <span class="color-info-50"></span>
+    <span class="color-info-100"></span>
+    <span class="color-info-200"></span>
+    <span class="color-info-300"></span>
+    <span class="color-info-400"></span>
+    <span class="color-info-500"></span>
+    <span class="color-info-600"></span>
+    <span class="color-info-700"></span>
+    <span class="color-info-800"></span>
+    <span class="color-info-900"></span>
+    <span class="color-danger-50"></span>
+    <span class="color-danger-100"></span>
+    <span class="color-danger-200"></span>
+    <span class="color-danger-300"></span>
+    <span class="color-danger-400"></span>
+    <span class="color-danger-500"></span>
+    <span class="color-danger-600"></span>
+    <span class="color-danger-700"></span>
+    <span class="color-danger-800"></span>
+    <span class="color-danger-900"></span>
+    <span class="color-warning-50"></span>
+    <span class="color-warning-100"></span>
+    <span class="color-warning-200"></span>
+    <span class="color-warning-300"></span>
+    <span class="color-warning-400"></span>
+    <span class="color-warning-500"></span>
+    <span class="color-warning-600"></span>
+    <span class="color-warning-700"></span>
+    <span class="color-warning-800"></span>
+    <span class="color-warning-900"></span>
+    <span class="color-success-50"></span>
+    <span class="color-success-100"></span>
+    <span class="color-success-200"></span>
+    <span class="color-success-300"></span>
+    <span class="color-success-400"></span>
+    <span class="color-success-500"></span>
+    <span class="color-success-600"></span>
+    <span class="color-success-700"></span>
+    <span class="color-success-800"></span>
+    <span class="color-success-900"></span>
+    <span class="color-fusion-50"></span>
+    <span class="color-fusion-100"></span>
+    <span class="color-fusion-200"></span>
+    <span class="color-fusion-300"></span>
+    <span class="color-fusion-400"></span>
+    <span class="color-fusion-500"></span>
+    <span class="color-fusion-600"></span>
+    <span class="color-fusion-700"></span>
+    <span class="color-fusion-800"></span>
+    <span class="color-fusion-900"></span>
+</p>
+@*<script src="~/SmartAdmin/dist/js/jquery-3-5-1.min.js"></script>*@
+<script src="~/lib/jquery-3-7-0.js"></script>
+<script src="~/lib/paper-full.min.js"></script>
+<script>
+    var message = '@Html.Raw(TempData["message"])' || "";
+    if (message != "") {
+        localStorage.setItem("message", message);
+    }
+</script>

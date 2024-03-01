@@ -1,0 +1,68 @@
+﻿<div class="row">
+    <div class="col">
+        <div class="table-responsive h-scrollbar-primary">
+            <table id="CityTable" data-topButtons="add" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                <thead>
+                    <tr>
+                        <th col-data="Name" orderable>İl</th>
+                        <th col-data="Code" orderable>Plaka</th>
+                        <th col-data="CountryIdAd" col-dynamic="Domain_" col-noSearchable orderable>Ülke Adı</th>
+                        <th col-data="PhoneCode" col-noSearchable orderable>Telefon Kodu</th>
+                        <th col-role="action" action-list="edit,delete">İşlemler</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="CityModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">İl Tanım Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="CityForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">*Ad</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="CountryId" class="form-label">* Ülke Ad</label>
+                            <select id="CountryId" name="CountryId" class="form-control form-control-xs" opt-sel2="true" data-type="static" source="Predefined/GetAll/Country" data-text="name" data-value="id">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="Code" class="form-label">* Plaka Kod</label>
+                            <input type="text" id="Code" name="Code" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="PhoneCode" class="form-label">* Telefon Kod</label>
+                            <input type="text" id="PhoneCode" name="PhoneCode" class="form-control form-control-xs" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                <button class="btn btn-primary" data-role="save" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

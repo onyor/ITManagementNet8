@@ -1,0 +1,292 @@
+﻿@using ITX.Application.Dtos.Identity;
+@{
+    ViewData["Title"] = "ClientProfile";
+    Layout = "~/Views/Shared/Request/Main.cshtml";
+
+}
+
+
+@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Hesap" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Hesap Ayarları" }}
+        }
+    };
+}
+<style type="text/css">
+    .rightSaveBtn {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        padding: 1rem;
+        border-top: 0px solid #dee2e6;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    .allAppointmentDivHide {
+        display: none !important;
+    }
+</style>
+
+
+<main id="js-page-content" role="main" class="page-content p-0 d-flex justify-content-center">
+    @* <div class="row">
+    @await Html.PartialAsync("_Breadcrumb", parents)
+    </div> *@
+    <div class="container-fluid">
+        <div class="row align-items-start justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-3">
+                @*  <div class="subheader mt-2 mb-3">
+                <h1 class="subheader-title">
+                <i class='subheader-icon fa fa-user'></i> Hesap
+                <small>
+                Hesap Ayarları
+                </small>
+                </h1>
+                </div> *@
+                <div class="panel panel-default" style="height: 80vh; overflow: auto;">
+                    <div class="panel-hdr backBtn" style="display:none;">
+                        <div class="row">
+                            <div class="col-3 d-flex align-items-center" onclick="window.history.back();" style="cursor:pointer">
+                                <i class="fas fa-arrow-left  mr-2 fa-lg "></i> <span class="font-weight-bolder mb-0 h5">Geri</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="panel-container show">
+                            <div class="panel-hdr text-danger approveButtonsHeader" style="display:none;">
+                                <i class="fa fa-info fa-lg mr-2"></i>
+                                <h2>
+                                    Onay vermeniz ve yurt bilginizi girmeniz durumunda bilgileriniz otomatik olarak güncellenecektir.
+                                </h2>
+                            </div>
+                            <div class="panel-content">
+                                <div class="panel-tag approveButtons" style="display:none;">
+                                    <div id="forms">
+                                        
+                                    </div>
+                                    @* <div class="custom-control custom-switch mt-1 ml-2 d-flex align-items-center justify-content-between flex-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="ConsentToDataProcessing">
+                                        <label class="custom-control-label" for="ConsentToDataProcessing">
+                                            <span class="d-inline-block">
+                                                Kişisel verilerimin işlenmesine <span class="text-danger font-weight-bold">&nbsp;izin veriyorum.&nbsp;</span>
+                                            </span>
+                                        </label>
+                                    </div> *@
+                                    <div class="col-3 mt-1 dormClass">
+                                        <label for="DormId" class="form-label">Yurt </label>
+                                        <select id="DormId" name="DormId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="AdminManagement/GetAll/Dorm" data-text="name" data-value="id" opt-initialText required>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <form name="ClientProfileForm" autocomplete="off">
+
+                                    <input id="hdnDataId" name="Id" type="hidden" value="0" data-id-type="number" />
+                                    <input id="hdnDormId" name="DormId" type="hidden" value="0" data-id-type="number" />
+                                    <input id="hdnDormBlockId" name="DormBlockId" type="hidden" value="0" data-id-type="number" />
+                                    <input id="hdnDormBlockCode" name="DormBlockCode" type="hidden" value="0" data-id-type="number" />
+                                    <div class="clientDataClass">
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label class="form-label">Ad</label>
+                                                <input type="text" id="Name" name="Name" class="form-control form-control-xs" disabled />
+                                            </div>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label class="form-label">Soyad</label>
+                                                <input type="text" id="Surname" name="Surname" class="form-control form-control-xs" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label class="form-label">Kimlik Numarası</label>
+                                                <input type="text" id="CitizenNo" name="CitizenNo" class="form-control form-control-xs" disabled />
+                                            </div>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 genderClass">
+                                                <label for="GenderId" class="form-label">Cinsiyet</label>
+                                                <select id="GenderId" name="GenderId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="Forms/GetEnumList/Gender" data-text="ad" data-value="deger" opt-initialText required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label for="Email" class="form-label">E-Posta</label>
+                                                <input type="text" id="Email" name="Email" class="form-control form-control-xs" required />
+                                            </div>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label for="GsmNumber" class="form-label">Telefon Numarası</label>
+                                                <input type="text" id="GsmNumber" name="GsmNumber" class="form-control form-control-xs" maxlength="11" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <label class="form-label">Doğum Tarihi</label>
+                                                <input type="date" id="BirthDate" name="BirthDate" class="form-control form-control-xs flatpickr" required />
+                                            </div>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 birthPlaceClass">
+
+                                                <label class="form-label">Doğum Yeri</label>
+                                                <input id="BirthPlace" type="text" name="BirthPlace" class="form-control form-control-xs" >
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            @* <div class="col dormClass">
+                                                <label for="DormId" class="form-label">Yurt </label>
+                                                <select id="DormId" name="DormId" class="form-control form-control-xs" data-type="static" opt-sel2="true" source="AdminManagement/GetAll/Dorm" data-text="name" data-value="id" opt-initialText required>
+                                                </select>
+                                            </div> *@
+                                            <div class="col">
+                                                <label for="DormBlockIdName" class="form-label">Yurt Bina Bilgisi</label>
+                                                <input type="text" id="DormBlockIdName" name="DormBlockIdName" class="form-control form-control-xs" disabled />
+                                            </div>
+                                            <div class="col">
+                                                <label for="BlockFloorNo" class="form-label">Yurt Bina Kat Bilgisi</label>
+                                                <input type="text" id="BlockFloorNo" name="BlockFloorNo" class="form-control form-control-xs" />
+                                            </div>
+                                            <div class="col">
+                                                <label for="RoomNo" class="form-label">Oda Numarası</label>
+                                                <input type="text" id="RoomNo" name="RoomNo" class="form-control form-control-xs" />
+                                            </div>
+                                        </div>
+
+                                        <div class="pastRequestStatus" style="display:none;">
+                                            <div class="custom-control custom-switch mt-3 d-flex align-items-center justify-content-between pastAppointmentDiv">
+                                                <input type="checkbox" class="custom-control-input" id="HideHistory" name="HideHistory">
+                                                <label class="custom-control-label " for="HideHistory">
+                                                    Geçmiş randevu süreçlerim yeni danışmanım tarafından görüntülenemesin.
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-switch mt-2 d-flex align-items-center justify-content-between allAppointmentDiv">
+                                                <input type="checkbox" class="custom-control-input" id="HideAll" name="HideAll">
+                                                <label class="custom-control-label " for="HideAll">
+                                                    Geçmiş randevu süreçlerim hiçbir danışmanım tarafından görüntülenemesin.
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rightSaveBtn">
+                                            <button class="btn btn-info btnSave" data-role="save" type="button" style="display: none;">
+                                                Kaydet
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="LoginForm" name="LoginForm" class="login200-form validate-form" action="/Account/Login" method="post" style="display:none">
+        @* <div class="wrap-input100 validate-input" data-validate="Kullanıcı Adı Gerekli"> *@
+        <div class="wrap-input100">
+            <input id="LoginFormEmail" class="input100" type="text" name="Email" placeholder="Kullanıcı Adı">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        @* <div class="wrap-input100 validate-input" data-validate="Şifre gerekli"> *@
+        <div class="wrap-input100">
+            <input id="LoginFormPassword" class="input100" type="password" name="Password" placeholder="Parola" autocomplete="current-password">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <div class="wrap-input100">
+            <input id="LoginFormCitizenNo" class="input100" type="text" name="CitizenNo" placeholder="T.C. Kimlik No">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-sign-in-alt" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <div class="container-login100-form-btn">
+            <button id="loginBtn" type="submit" data-toggle="tooltip" class="login100-form-btn ajax-block">
+                GİRİŞ
+            </button>
+        </div>
+    </form>
+    <!-- Modal center -->
+    <div class="modal fade" id="custodyModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                @* <div class="modal-header">
+
+                </div> *@
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label" for="custodyClientTcNo">
+                            <h3>Velayet Edilecek Ögrencinin T.C. Kimlik Numarası:</h3>
+                        </label>
+                        <input type="text" id="custodyClientTcNo" class="form-control border-success">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="custodyClientTcNoButton" type="button" class="btn btn-success text-white">Onayla ✔️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="pdfModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="text-white" id="pdfName"></h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto text-center">
+                            <form id="form-0" name="FirstStepForm" class="needs-validation" autocomplete="off">
+                                <div class="row iframe-row" style="height: auto;">
+                                    <div class="col-12 iframe-container">
+                                        @* <iframe id="responsive-iframe" class="responsive-iframe" frameborder="0" allowfullscreen src=""></iframe> *@
+                                        <canvas id="the-canvas"></canvas>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    <button type="button" id="prevPdf" class="btn btn-primary text-white m-2">Önceki</button>
+                                    <label for="exampleInputEmail1" class="form-label mt-3"> <span>Sayfa: <span id="page_num"></span> / <span id="page_count"></span></span></label>
+                                    <button type="button" id="nextPdf" class="btn btn-primary text-white m-2">Sonraki</button>
+                                </div>
+                                <div class="row text-sm-center text-md-left text-dark d-flex">
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <a id="approvedBtn" class="btn btn-success text-white mt-2 mt-sm-0 disabled" role="button" aria-disabled="true">
+                                            Formu Okudum Onaylıyorum ✓
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

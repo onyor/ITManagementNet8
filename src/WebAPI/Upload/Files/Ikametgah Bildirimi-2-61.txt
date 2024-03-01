@@ -1,0 +1,32 @@
+Sudo komutlar
+Fg63@2fKh45
+
+sudo chown -R isteknoloji:isteknoloji /var/www/WebApi
+sudo chown -R isteknoloji:isteknoloji /var/www/WebMvc
+sudo chmod -R 755 /var/www
+cd /etc/apache2/sites-available
+
+sudo apache2ctl restart
+
+
+sudo systemctl status apache2.service -l --no-pager
+sudo journalctl -u apache2.service --since today --no-pager
+sudo apachectl configtest
+sudo nano /etc/apache2/apache2.conf
+# Include the virtual host configurations:
+IncludeOptional sites-enabled/*.conf
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+ServerName 127.0.0.1
+
+sudo apachectl configtest
+sudo systemctl reload apache2.service
+
+/usr/bin/dotnet /var/www/WebApi/WebAPI.dll
+netstat -tulpn
+systemctl daemon-reload
+
+/usr/bin/dotnet /var/www/WebMvc/WebMVC.dll --urls=https://localhost:44325
+
+git update-index --assume-unchanged C:\AzureProjects\Repos\HRManagement\src\WebAPI\appsettings.json
+git update-index --no-assume-unchanged C:\AzureProjects\Repos\HRManagement\src\WebAPI\appsettings.json

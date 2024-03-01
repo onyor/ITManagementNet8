@@ -1,0 +1,62 @@
+﻿@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Form Yönetimi" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Veri Listesi" }}
+        }
+    };
+}
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="form-label " for="formTanimList">Form Listesi</label>
+                                <select class="form-control" id="formTanimList" name="formTanimList" tabindex="-1" aria-hidden="false">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel d-none">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-xl-12 isTable">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    <table id="VeriListTable" data-topButtons="add" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="FormGoruntulemeModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        @await Html.PartialAsync("FormGoruntuleme")
+    </div>
+</div>

@@ -1,0 +1,204 @@
+﻿@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Yetkilendirme" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Menü Tanım" }}
+        }
+    };
+}
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-4">
+            <div class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-hdr bg-primary-200 text-white">
+                            <h2>
+                                Veri Kurtarma
+                            </h2>
+                            <div class="panel-toolbar mr-2">
+                                <button class="btn btn-panel-collapse no-shadow" data-action="panel-collapse">
+                                    <i class="fa fa-window-minimize text-white"></i>
+                                </button>
+                                <button class="btn btn-panel-collapse  no-shadow" data-action="panel-fullscreen">
+                                    <i class="fa fa-arrows text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <form name="AramaKriterForm" autocomplete="off">
+                            <div class="panel-container collapse show">
+                                <div class="panel-content">
+                                    <div class="row align-items-center">
+                                        <div class="col col-4 p-1">
+                                            <label for="CreatedAt" class="form-label">İşlem Tarihi</label>
+                                        </div>
+                                        <div class="col col-4 p-1">
+
+                                            <input type="date" id="CreatedAt1" name="CreatedAt" data-basTar class="form-control form-control-xs flatpickr" />
+                                        </div>
+                                        <div class="col col-4 p-1">
+
+                                            <input type="date" id="CreatedAt2" name="CreatedAt" data-bitTar class="form-control form-control-xs flatpickr" />
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <label for="MenuController" class="form-label">Controller</label>
+                                            <select id="MenuController" class="form-control form-control-xs" tabindex="-1" aria-hidden="false" data-placeholder="ssss">
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="MenuAction" class="form-label">Action</label>
+                                            <select id="MenuAction" class="form-control form-control-xs">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col p-1 d-flex justify-content-center">
+                                            <button id="btnSearch" type="button" class="btn bg-success-400 btn-pills text-white">
+                                                <i class="fa fa-search px-2" aria-hidden="true"></i>
+                                                Sorgula
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    <table id="RestoreDataTable" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr>
+                                                <th col-data="Id">Id</th>
+                                                <th col-role="action" action-list="action-list='switch/isDelete">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="RestoreDataModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Menü Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="RestoreDataForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="0" data-id-type="number" />
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">Menü Adı</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="Description" class="form-label">Menü Açıklama</label>
+                            <input type="text" id="Description" name="Description" class="form-control form-control-xs">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="ParentId" class="form-label">Bağlı Menü</label>
+                            <select id="ParentId" name="ParentId" class="form-control form-control-xs" tabindex="-1" aria-hidden="false">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="Order" class="form-label">Sıralaması</label>
+                            <input type="number" id="Order" name="Order" class="form-control form-control-xs" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="RestoreDataController" class="form-label">Controller</label>
+                            <select id="RestoreDataController" name="RestoreDataController" class="form-control form-control-xs" tabindex="-1" aria-hidden="false" data-placeholder="ssss">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="RestoreDataAction" class="form-label">Action</label>
+                            <select id="RestoreDataAction" name="RestoreDataAction" class="form-control form-control-xs">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Roller</label>
+                            <select id="RestoreDataRoles" name="RestoreDataRoles" class="mul-select" multiple="multiple" style="width: 100% !important;" tabindex="-1" aria-hidden="true">
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="Url" class="form-label">Adres</label>
+                            <input type="hidden" id="Url" name="Url" class="form-control form-control-xs">
+                            <input type="text" id="Fake_url" name="Fake_url" class="form-control form-control-xs" disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="Param" class="form-label">Parametre</label>
+                            <input type="text" id="Param" name="Param" class="form-control form-control-xs">
+                        </div>
+                        <div class="col">
+                            <label for="Icon" class="form-label">İkon</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-secondary btn-xs" data-icon="fas fa-map-marker-alt" id="iconpick"></button>
+                                </div>
+                                <input type="text" id="Icon" name="Icon" class="form-control form-control-xs" placeholder="RestoreData SİMGE">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                <button class="btn btn-primary" id="addRowBtn" type="button" data-role="save">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

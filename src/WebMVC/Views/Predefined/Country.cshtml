@@ -1,0 +1,127 @@
+﻿@using ITX.Application.Extensions;
+@using ITX.Application.Shared;
+@using ITX.WebMVC.Models
+
+@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Kurumsal Tanımlamalar " }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Ülke Tanım" }}
+        }
+    };
+}
+
+@{
+    List<TableAuthorityViewModel> TableAuthorityList = new List<TableAuthorityViewModel>();
+    TableAuthorityList.Add(new TableAuthorityViewModel()
+            {
+                TableName = "Country",
+                ActionButtonList = new List<string> { "edit", "delete" },
+                TopButtonList = new List<string> { "add" },
+            });
+}
+
+@await Html.PartialAsync("_TableAuthority", TableAuthorityList);
+
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    @{
+                                        var CountryActionsString = TempData["CountryActionsString"] as string;
+                                        var CountryTopButtonsString = TempData["CountryTopButtonsString"] as string;
+                                    }
+                                    <table id="CountryTable" data-topButtons="@CountryTopButtonsString" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr>
+                                                <th col-data="Name" orderable>Ülke</th>
+                                                <th col-data="Code" orderable>Ülke Kodu</th>
+                                                <th col-data="CurrencyDefinitionIdSymbol" col-dynamic="Domain_" orderable>Para Birimi</th>
+                                                <th col-data="PhoneCode" col-noSearchable orderable>Telefon Kodu</th>
+                                                @if (!string.IsNullOrEmpty(CountryActionsString))
+                                                {
+                                                    <th col-role="action" action-list="@CountryActionsString">İşlemler</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="CountryModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">Ülke Tanım Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="CountryForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id" value="" data-id-type="number" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="Name" class="form-label">Ad</label>
+                            <input type="text" id="Name" name="Name" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="Code" class="form-label">Ülke Kodu</label>
+                            <input type="text" id="Code" name="Code" class="form-control form-control-xs" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="PhoneCode" class="form-label">Telefon Kodu</label>
+                            <input type="number" id="PhoneCode" name="PhoneCode" class="form-control form-control-xs" />
+                        </div>
+                        <div class="col">
+                            <label for="CurrencyDefinitionId" class="form-label">Döviz Tanımı</label>
+                            <select id="CurrencyDefinitionId" name="CurrencyDefinitionId" class="form-control form-control-xs" opt-sel2="true" data-type="static" source="Predefined/GetAll/CurrencyDefinition" data-text="kisaAd" data-value="id">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                @if (User.HasClaim(c => c.Type == "Save" && c.Value == "True"))
+                {
+                    <button class="btn btn-primary" id="addRowBtn" data-role="save" type="button">
+                        Kaydet
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

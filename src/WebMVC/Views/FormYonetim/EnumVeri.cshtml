@@ -1,0 +1,111 @@
+﻿@{
+    var parents = new Dictionary<string, Dictionary<string, string>>
+{
+        {
+            "MainPage", new Dictionary<string, string> {{"jsonKey", "Anasayfa"}}
+        },
+        {
+            "HasSub", new Dictionary<string, string> {{"jsonKey", "Yönetim" }}
+        },
+        {
+            "ActivePage", new Dictionary<string, string> {{"jsonKey", "Enum Veri" }}
+        }
+    };
+}
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        @await Html.PartialAsync("_Breadcrumb", parents)
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col">
+                                <div class="table-responsive h-scrollbar-primary">
+                                    <table id="EnumVeriTable" data-topButtons="add" class="table table-bordered table-hover table-striped w-100 nowrap display compact" data-responsive="false">
+                                        <thead>
+                                            <tr>
+                                                <th col-data="Ad">Ad</th>
+                                                <th col-data="EnumTanimAd">Enum Tanım Adı</th>
+                                                <th col-data="Kod">Kod</th>
+                                                <th col-data="Deger">Değer</th>
+                                                <th col-role="action" action-list="edit,delete">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+
+<div id="EnumVeriModal" aria-hidden="true" aria-labelledby="modalCaption" class="modal fade" data-backdrop="static" data-keyboard="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <span id="modalCaption" class="form-span">EnumVeri Ekle/Güncelle</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="EnumVeriForm" autocomplete="off">
+                    <input type="hidden" id="hdnDataId" name="Id"  value="" data-id-type="number" />
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="EnumTanimId" class="form-label">Enum Tanım</label>
+                            <select id="EnumTanimId" name="EnumTanimId" data-type="dynamic" data-text="Ad" class="form-control" opt-sel2="true" data-firstEmpty="true" required>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="Ad" class="form-label">Ad</label>
+                            <input type="text" id="Ad" name="Ad" class="form-control form-control-xs" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="SiraNo" class="form-label">Sıra No</label>
+                            <input type="number" id="SiraNo" name="SiraNo" class="form-control form-control-xs" value="0" required />
+                        </div>
+                        <div class="col">
+                            <label for="Kod" class="form-label">Kod</label>
+                            <input type="text" id="Kod" name="Kod" class="form-control form-control-xs" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="Deger" class="form-label">Değer</label>
+                            <input type="number" id="Deger" name="Deger" class="form-control form-control-xs" required />
+                        </div>
+                        <div class="col">
+                            <label for="Aciklama" class="form-label">Açıklama</label>
+                            <input type="text" id="Aciklama" name="Aciklama" class="form-control form-control-xs" />
+                            @*<textarea id="Aciklama" name="Aciklama" class="form-control form-control-xs" rows="3"></textarea>*@
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-content="remove" data-dismiss="modal" type="button">
+                    Vazgeç
+                </button>
+                <button class="btn btn-primary" data-role="save" type="button">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

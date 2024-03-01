@@ -1,0 +1,20 @@
+# Base image for runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 5001
+
+# SDK image to build the project
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+COPY ["src/WebAPI/OCP.WebAPI.csproj", "src/WebAPI/"]
+COPY ["nuget.config", "./"]
+RUN dotnet restore "src/WebAPI/OCP.WebAPI.csproj"
+
+# Copy the source code and publish the application
+COPY ["src", "."]
+RUN dotnet publish "src/WebAPI/OCP.WebAPI.csproj" -c Release -o /app/publish
+
+# Final stage/image
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "OCP.WebAPI.dll"]

@@ -1,0 +1,339 @@
+@port = 44323
+@email = "admin@sbb.gov.tr"
+@password = "Test1235"
+@token = eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidHlwIjoiSldUIn0.ZB-xLwNSVwsnBV13iuTUJI1SBvdHEHEFLJELFDK_uQtxxOa2Lk5xSg.vwieoNUq4RgsQDUU5g9a6Q.WUenXUwmVzGSVGlKsSCYkjjXsiRpqqq_IdcgVJlTc1ODPi46Xvl_B7GF540F38ciahfxfgOKhGFbst_OU5lm9OTFSwIIBuWSPTtE4msaM58jg3rBHiR_nHKjBEsTpFHf5t-0fAeB4p4o48Z3vh5NFVwbg1O0FElyemHDO-birY1SiyJm_od5H048FqpqgR9M438gF917K_Se1f2O6QT3nHbnoJUqbVTQdnPLDDntI8L1MLxvRhZ4GG5GRMp9P0xif7Vb2ejrzTU0Fg0BJWCpfQUan1ZRNH10s4BGYofSkbFgUyooKUfoU0oQRtOO-d-SpvohIsAgaYoyOXlMk79LXFcdDWnY84Rz1uxTGkh0-Mhbl52q8XDwLAG7ffXgA4Ws_CgjVqaveCH31xxep2F9KQynkcgXXmptaMDUX4dtwRY6QBO2e1GVmSfniW_4Hdc7KcVbzYBpzDj-erbsuqJ4Tg33SfVDvKaSsPGB8-HvjkkSnm7VcNgzWr9DTRW6-2FYzQJeMlPGwFDMMuRD0cYBTALb8RJXJrHfGH3lE-gvuebDls5RMGgfAY6RmJ2GPHz5AYxus6vhrFYisbenK1AZKr6cz0NbFPw6LRbBrXjkJjjIXBnjei7LmPRKNYYv_80l.j-7mNiC8O8lJK7z1F8SDWQ
+
+
+
+### ***************************************************************************
+### ACCOUNT CONTROLLER ********************************************************
+### ***************************************************************************
+
+### Login [FromForm]
+POST https://localhost:44323/api/account/login
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+admin@sbb.gov.tr
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+Test1234
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+
+### ForgotPassword [FromForm]
+POST https://localhost:44323/api/account/forgotpassword
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+istech@mailinator.com
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+
+### ResetPassword [FromForm]
+POST https://localhost:44323/api/account/resetPassword
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+istech@mailinator.com
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+Test1235
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="confirmPassword"
+
+Test1235
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="token"
+
+CfDJ8GP6wEEaGD5NhK2i8teNRM7k9fyd1eKjQ3%2BF8cw23KzeU1M78T8oyFVk1%2FQh%2B%2F7SfutOnGmA1gcIdY2MxUte%2Frl3d3uhUaV%2Fbc%2BK5Lx4wqM4U6NOGTKsHRiFdag6HvZB4%2FTau9oGnlEM9zxaZWrahWJW8oQodnbW15RUXKbRy27d5OerxBOZvRPRZ753YTQagEeljnPxGZy5MhEsYbcXtL%2FK2gMnA0HBSeCWf1KsfXTd
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### ---------------------------------------------------------------------------
+
+### ChangePassword [FromForm]
+POST https://localhost:44323/api/account/changepassword
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidHlwIjoiSldUIn0.7P-INYcD4tOs43jXDxNyssXclmLr12uB1Y_TcGaKdz3kfPD3sBNjPQ.Q_Hfpl3LEi2D24_f2yGxbw.N9WIuAS8MW7TOxp8TPcQGsdTxCEWS34pOSQaHahgo7KzB1_Amuf6jzuOZ9tXlMBj3HeZr86gOYolSwcIB0-xlUm89M5q9mNwVcTQimIlROJeFpj-gh8GoF-sPwE8hWW06jFnUTO9aq_8x9n35oeYi967txXeIaLrXvdZjXOs5AT1LUFTM-TZ85xmMb8aoHvlc3g4nNT7GtOdyayeaFsxaNRiRdmp9iPDRIjYe-36NWWesgK5o-wfDLgQ088AzVggI6P-ltsFJ9uqqhPCVhxsBR5bY9Knm0t70a0oVynehlBTNKsXhNJ1QwwpDSjsr-LAo0YfnRUHyYtJh1oL_RW1qh1nrFYZiL3YPPfnG1sATeMDKkqL-H5APuVBfMPBu4qLpUOePanTWSvDXVpJOS6gS4l4LjembBG63fYKBltjpkMNGIqw7z0vXAvFcRFVIIyVvPbECrYoJ8xiuDRC0_R3wcGVp6jFPyx1z_SbTIld_DBgaif1vYT6X9rDnLWoG_RNBy993c10TdTUA-SBcJmADw2TvM-ZFeEJ_j8o6XpaBjwg-pV70lHr9-Kk3H6Sq_lv5Z8BKXdLc5EV6ckbsrlIaRzunTWzmIXeL8T2DZhTOsRE7_O_JOGTcd5CIdIFrdH4Suu_9wA1iqnh2Durp4aPaohCDTDxw1Cs8OP1_TTEwPo.Omtl-U9Hb0MgkYGqCLF20w
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="currentPassword"
+
+Test1235
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+Content-Disposition: form-data; name="newPassword"
+
+Test1234
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+Content-Disposition: form-data; name="confirmNewPassword"
+
+Test1234
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+### Login as User [FromForm]
+POST https://localhost:44323/api/account/loginAsUser
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidHlwIjoiSldUIn0.dsjGokBowXsVbP9yfNnpRp8YBVq0TfO3_kCt-x1INGn6FJgdnRZoiA.zrV7VRrrQvB3oCbQczl35Q.xesUCPqGPPXb2_H-IxNhOZReQLYk1XH_b3vcE_ml1PlbhpUDWfU8lu5paXeC2y6RQL9KYHb4bn5ZuiJs8Va5FbzjqVDz0MzZzYHwBRwmRKMOjM8AviSplIh7PNX_5v-Wgcc9SRGI-5lDarH3H5Xt4iC7OP61DNACq4y-xJL7t0kb3AuIIgaKs7zaJ1RSP2C8QVQx9TWCiuO6odvwg53LX0g-PIRR61jQCRkvaU6VISpLsU_H-4UUMKd05oOnP2bdQ_6LNfIVxbOB86OcNTdDq_clA4ZEn_9yKR7NSBPo_FLA9d8Ikj-686fw4UUPw3Fr_GPLeZN8UMTYsxzE5oWmBKhLYxTpvYVWMOEvM94pFqVt_9mr1k5C5YxG1SlYrHAeCfYCYgOesdIfdxyTjAd_65EPk3zZbzYThQcxGp8U8C7s-54fMKCiRWSnwq9Ly0-PO35jbDWXxZZopzFn_b8gm_g0jS19ctT8aFa5yhb9A-ipK5pXYS437XOdDf-XO3iZ2iJWE6sYCDDpMoPfcbE2UfOLqW15_0pw_uV27eC_1HemMi5RtsevGw_DeI7Y-p7RvI5R4zqihyW1SASp8CLxw_S0Spx0wMVtWkMwje0Z8oE8ARoJuM58J3iksM2-P7bCZmP5KdR2ZhkO-8CD1aZO6vFl7k7Sx80bAb98fiNrlpw.spcfnotf0ASav6h-A_UBmQ
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+bertancakici@isteknoloji.com.tr
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+Test1234
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+### Get Current User
+GET https://localhost:44323/api/account
+Authorization: Bearer {{token}}
+### ---------------------------------------------------------------------------
+
+
+
+### ***************************************************************************
+### REQUESTLOGS CONTROLLER ****************************************************
+### ***************************************************************************
+
+### Get RequestLogs by SearchDto
+POST https://localhost:44323/api/requestLogs/load
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="userId"
+
+9da153a6-ff20-4d9d-8126-cc514c6fd3e9
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="beginDate"
+
+2021-10-10 00:00:00
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="endDate"
+
+2021-12-31 23:59:59
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="skip"
+
+0
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="pageSize"
+
+100
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+
+
+
+### ***************************************************************************
+### HITAPYONETIM CONTROLLER ***************************************************
+### ***************************************************************************
+
+GET https://localhost:{{port}}/api/hitapyonetim/SgkDaysBetween
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="d1"
+
+2020-03-20
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="d2"
+
+2022-02-15
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+### Create or Update Brand [FromForm]
+POST https://localhost:44323/api/brands
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="id"
+
+1025
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+brand new brand updated
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="objectTypeId"
+
+10
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### ---------------------------------------------------------------------------
+
+
+
+### ***************************************************************************
+### MENUS CONTROLLER **********************************************************
+### ***************************************************************************
+
+### Get Menus
+POST https://localhost:44323/api/menus/load2
+### ---------------------------------------------------------------------------
+### Create Menu
+POST https://localhost:44323/api/menus
+Content-Type: application/json
+
+{
+    "name": "test menu 4 from api",
+    "order": 35,
+    "isActive": true,
+    "menuRoles": [
+        {
+            "roleId": "12C6FE45-FBDD-44EC-AD55-08D8EA530D59",
+            "isActive": true
+        },
+        {
+            "roleId": "4C7179A4-BF03-472C-AD56-08D8EA530D59",
+            "isActive": true
+        }
+    ]
+}
+### ---------------------------------------------------------------------------
+### Update Menu
+POST https://localhost:44323/api/menus
+Content-Type: application/json
+
+{
+    "id": 8,
+    "name": "test menu 2 from api updated 2",
+    "order": 25,
+    "isActive": true,
+    "menuRoles": [
+        {
+            "roleId": "4C7179A4-BF03-472C-AD56-08D8EA530D59",
+            "isActive": true
+        }
+    ]
+}
+### ---------------------------------------------------------------------------
+### GetMenuHtmlByRoleId
+GET https://localhost:44323/api/menus/byroleid
+    ?roleId=12C6FE45-FBDD-44EC-AD55-08D8EA530D59
+    &path=abc
+Content-Type: application/json
+
+{
+    "id": 8,
+    "name": "test menu 2 from api updated 2",
+    "order": 25,
+    "isActive": true,
+    "menuRoles": [
+        {
+            "roleId": "4C7179A4-BF03-472C-AD56-08D8EA530D59",
+            "isActive": true
+        }
+    ]
+}
+### ---------------------------------------------------------------------------
+
+
+
+### ***************************************************************************
+### ROLES CONTROLLER **********************************************************
+### ***************************************************************************
+### Get Roles
+GET https://localhost:44323/api/roles
+### ---------------------------------------------------------------------------
+### Get Role by Id
+GET https://localhost:44323/api/roles/34d36fd3-b912-46f3-ccca-08d8ef881f5e
+### ---------------------------------------------------------------------------
+### Delete Role by Id
+DELETE https://localhost:44323/api/roles/34d36fd3-b912-46f3-ccca-08d8ef881f5e
+### ---------------------------------------------------------------------------
+
+
+
+### ***************************************************************************
+### USERS CONTROLLER **********************************************************
+### ***************************************************************************
+
+### ---------------------------------------------------------------------------
+### Get Users
+GET https://localhost:44323/api/users/f009fded-682e-4d14-be18-08d8edd4ad54
+### ---------------------------------------------------------------------------
+### Create User
+POST https://localhost:44323/api/users
+Content-Type: application/json
+
+{
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Bertan",
+    "surname": "ÇAKICI",
+    "title": "Developer",
+    "email": "bertancakici@gmail.com",
+    "phoneNumber": "5349130233",
+    "password": "Test1234",
+    "userRoles": [
+        {
+            "roleId": "12c6fe45-fbdd-44ec-ad55-08d8ea530d59"
+        },
+        {
+            "roleId": "4C7179A4-BF03-472C-AD56-08D8EA530D59"
+        }
+    ]
+}
+### ---------------------------------------------------------------------------
+### Update User
+POST https://localhost:44323/api/users
+Content-Type: application/json
+
+{
+    "id": "3023BD2D-0B7E-4B5F-042D-08D8ED1E0AA2",
+    "name": "user from api updated2",
+    "surname": "canga",
+    "title": "web user",
+    "email": "canga@msn.com",
+    "phoneNumber": "53212345678",
+    "password": "Test1234",
+    "userRoles": [
+        {
+            "roleId": "4C7179A4-BF03-472C-AD56-08D8EA530D59"
+        }
+    ]
+}
+### ---------------------------------------------------------------------------
+
+### Post Developer
+POST https://localhost:44365/api/developer
+Content-Type: application/json
+
+{
+    "firstName": "",
+    "lastName": "canga",
+    "email": "canga@msn.com",
+    "experience": 4
+}
+### ---------------------------------------------------------------------------
+### Post Tester
+POST https://localhost:44365/api/tester
+Content-Type: application/json
+
+{
+    "name": "user from api updated2",
+    "lastname": "canga",
+    "email": "canga@msn.com",
+    "experience": 4
+}
+### ---------------------------------------------------------------------------
+### POST Tester
+POST https://localhost:44345/api/customers
+Content-Type: application/json
+
+{
+}
+### ---------------------------------------------------------------------------
+### GET Tester
+GET https://localhost:44345/api/customers/j
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtc2suaHAuY29tIiwianRpIjoiODRlMWUyMzAtOWI1NS00M2M0LWE0MjAtM2I0ZTUxOWYwNjEzIiwiZXhwIjoxNjI0NjI3NTkyLCJpc3MiOiJodHRwOi8vbXljb2RlY2FtcC5pbyIsImF1ZCI6Imh0dHA6Ly9teWNvZGVjYW1wLmlvIn0.JEFy19RBh4xGbQhjSfaoBOfcx1YCM0kOAwZa8SFBZr4
+

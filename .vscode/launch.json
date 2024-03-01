@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core WebAPI",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-WebAPI",
+      // Projenizin yolu .NET 8.0 için güncellendi
+      "program": "${workspaceFolder}/src/WebAPI/bin/Debug/net8.0/OCP.WebAPI.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/WebAPI",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/src/WebAPI/Views"
+      }
+    },
+    {
+      "name": ".NET Core WebMVC",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-WebMVC",
+      // Projenizin yolu .NET 8.0 için güncellendi
+      "program": "${workspaceFolder}/src/WebMVC/bin/Debug/net8.0/OCP.WebMVC.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/WebMVC",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/src/WebMVC/Views"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug All",
+      "configurations": [".NET Core WebAPI", ".NET Core WebMVC"]
+    }
+  ]
+}
