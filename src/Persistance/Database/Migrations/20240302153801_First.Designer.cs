@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITX.Persistance.Database.Migrations
 {
     [DbContext(typeof(ITManagementDbContext))]
-    [Migration("20240229143701_First")]
+    [Migration("20240302153801_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -1377,7 +1377,7 @@ namespace ITX.Persistance.Database.Migrations
                             Id = 5L,
                             CreatedAt = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Description = "Dışa Aktar",
+                            Description = "Dýþa Aktar",
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Export"
@@ -1387,7 +1387,7 @@ namespace ITX.Persistance.Database.Migrations
                             Id = 6L,
                             CreatedAt = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Description = "İçe Aktar",
+                            Description = "Ýçe Aktar",
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Import"
@@ -3430,7 +3430,7 @@ namespace ITX.Persistance.Database.Migrations
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "İngilizce"
+                            Name = "Ýngilizce"
                         },
                         new
                         {
@@ -3448,7 +3448,7 @@ namespace ITX.Persistance.Database.Migrations
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Dil ve Anlatım"
+                            Name = "Dil ve Anlatým"
                         });
                 });
 
@@ -3542,7 +3542,7 @@ namespace ITX.Persistance.Database.Migrations
                             IsDeleted = false,
                             Name = "Scenario Test 1",
                             RequestLogTypeCodeId = 10,
-                            TestBaslik = "Test Başlık",
+                            TestBaslik = "Test Baþlýk",
                             TestDeger = 999,
                             TestDescription = "Test Description",
                             TestTarih = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -3561,7 +3561,7 @@ namespace ITX.Persistance.Database.Migrations
                             IsDeleted = false,
                             Name = "Scenario Test 2",
                             RequestLogTypeCodeId = 30,
-                            TestBaslik = "Test Başlık",
+                            TestBaslik = "Test Baþlýk",
                             TestDeger = 111,
                             TestDescription = "Test Description",
                             TestTarih = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

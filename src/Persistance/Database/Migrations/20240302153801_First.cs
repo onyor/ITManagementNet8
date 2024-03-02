@@ -952,8 +952,8 @@ namespace ITX.Persistance.Database.Migrations
                     { 2L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Düzenle", true, false, "Edit", null, null },
                     { 3L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Sil", true, false, "Delete", null, null },
                     { 4L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Ekle", true, false, "Add", null, null },
-                    { 5L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Dışa Aktar", true, false, "Export", null, null },
-                    { 6L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "İçe Aktar", true, false, "Import", null, null },
+                    { 5L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Dýþa Aktar", true, false, "Export", null, null },
+                    { 6L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Ýçe Aktar", true, false, "Import", null, null },
                     { 7L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Pasif", true, false, "Passive", null, null },
                     { 8L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Onayla", true, false, "Approve", null, null },
                     { 9L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Görüntüle", true, false, "View", null, null },
@@ -1011,9 +1011,9 @@ namespace ITX.Persistance.Database.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "İngilizce", null, null },
+                    { 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Ýngilizce", null, null },
                     { 2L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Matematik", null, null },
-                    { 3L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Dil ve Anlatım", null, null }
+                    { 3L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Dil ve Anlatým", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1248,8 +1248,8 @@ namespace ITX.Persistance.Database.Migrations
                 columns: new[] { "Id", "CityId", "CountryId", "CreatedAt", "CreatedBy", "CurrencyDefinitionId", "GenderId", "IsActive", "IsDeleted", "Name", "RequestLogTypeCodeId", "TestBaslik", "TestDeger", "TestDescription", "TestTarih", "UlasimAracId", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, 1L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1L, 10, true, false, "Scenario Test 1", 10, "Test Başlık", 999, "Test Description", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3L, null, null },
-                    { 2L, 2L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1L, 20, true, false, "Scenario Test 2", 30, "Test Başlık", 111, "Test Description", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3L, null, null }
+                    { 1L, 1L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1L, 10, true, false, "Scenario Test 1", 10, "Test Baþlýk", 999, "Test Description", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3L, null, null },
+                    { 2L, 2L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1L, 20, true, false, "Scenario Test 2", 30, "Test Baþlýk", 111, "Test Description", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3L, null, null }
                 });
 
             migrationBuilder.InsertData(
