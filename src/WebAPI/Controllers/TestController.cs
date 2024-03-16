@@ -1,16 +1,14 @@
 using Ardalis.Result;
 using AutoMapper;
+using ITX.Application.Dtos.ReportManagement;
+using ITX.Application.Dtos.Test;
 using ITX.Application.Interfaces.Test;
 using ITX.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using ITX.Application.Dtos.Test;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ITX.Infrastructure.Data.Services.Test;
-using ITX.Application.Dtos.ReportManagement;
-using System.Linq;
 
 namespace ITX.WebAPI.Controllers
 {
@@ -38,6 +36,27 @@ namespace ITX.WebAPI.Controllers
             _studentService = studentService;
             _scenarioService = scenarioService;
         }
+
+
+        [HttpGet("TestGraphQL")]
+        public async Task<Result<string>> TestGraphQL()
+        {
+            //var schema = Schema.For(@"
+            //  type Query {
+            //    hello: String
+            //  }
+            //");
+
+            //var root = new { Hello = "Hello World!" };
+            //var json = await schema.ExecuteAsync(_ =>
+            //{
+            //    _.Query = "{ hello }";
+            //    _.Root = root;
+            //});
+
+            return "";
+        }
+
 
         [HttpPost("RequestReportViewModel")]
         public async Task<Result<JsonResult>> RequestReportViewModel([FromForm] List<SearchParameterDto> searchParameterDto)

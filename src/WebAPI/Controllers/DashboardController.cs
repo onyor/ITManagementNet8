@@ -49,7 +49,7 @@ namespace ITX.WebAPI.Controllers
         }
 
         [HttpGet("Vertical/Panel2")]  // RequestAndAppointmentCount
-        public async Task<Result<string?>> Panel2()
+        public async Task<Result<string>> Panel2()
         {
             var filePath = Path.Combine(_env.ContentRootPath, "DummyJson", "RequestAndAppointmentCount.json");
 

@@ -1,23 +1,19 @@
-using Ardalis.Result;
-using Ardalis.Result.AspNetCore;
+﻿using Ardalis.Result.AspNetCore;
+using AutoMapper;
+using FluentValidation.AspNetCore;
+using HotChocolate;
 using ITX.Infrastructure;
-using ITX.Infrastructure.Data;
 using ITX.Persistance;
 using ITX.Persistance.Cache;
+using ITX.Persistance.Database;
+using ITX.Persistance.Database.Context;
 using ITX.WebAPI.Extensions;
+using ITX.WebAPI.GraphQL;
 using ITX.WebAPI.Helpers;
-using AutoMapper;
-using DevExpress.CodeParser;
-using DevExpress.XtraCharts;
-using FluentValidation.AspNetCore;
-using ITX.Infrastructure.Data;
-using ITX.WebAPI.Extensions;
-using ITX.WebAPI.Helpers;
-using ITX.WebAPI;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -27,15 +23,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using ITX.Persistance.Database.Context;
-using ITX.Persistance.Database;
-using ITX.Application.Shared;
+using Path = System.IO.Path;
 
 namespace ITX.WebAPI
 {
@@ -45,6 +36,7 @@ namespace ITX.WebAPI
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             var env = builder.Environment;
 
             // SERILOG configuration
@@ -96,14 +88,13 @@ namespace ITX.WebAPI
                     name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44335/")
-                               .WithHeaders("https://localhost:44333/")
+                        builder.WithOrigins("https://localhost:44334/")
+                               .WithHeaders("https://localhost:44334/")
                                .AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
             });
-
 
             builder.Services.AddHttpContextAccessor();
 
@@ -154,14 +145,16 @@ namespace ITX.WebAPI
                 mc.AddProfile(new MappingProfiles(context));
             });
 
+            builder.Services
+                .AddGraphQLServer()
+                .AddQueryType<Query>();
+
             var app = builder.Build();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-
-            app.UseDeveloperExceptionPage();
 
             app.ConfigureExceptionHandler();
 
@@ -190,11 +183,12 @@ namespace ITX.WebAPI
             {
                 Directory.CreateDirectory(uploadFolderPath);
             }
+            app.UseDeveloperExceptionPage();
 
-            //if (app.Environment.IsDevelopment())
-            //{
-            app.UseSwaggerDocumentation();
-            //}
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwaggerDocumentation();
+            }
 
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -203,12 +197,8 @@ namespace ITX.WebAPI
             });
 
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
-            // The CORS middleware must come after the call to UseRouting()
             app.UseCors(MyAllowSpecificOrigins);
 
             // Initialise and seed database
@@ -244,6 +234,8 @@ namespace ITX.WebAPI
             }
 
             app.MapControllers();
+
+            app.MapGraphQL();
 
             app.Run();
         }
