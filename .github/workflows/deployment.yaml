@@ -18,13 +18,13 @@ jobs:
             dotnet-version: '8.0.x'
 
       - name: Restore for WebAPI
-        run: dotnet restore ./src/WebAPI/WebAPI.csproj
+        run: dotnet restore ./src/WebAPI/ITX.WebAPI.csproj
 
       - name: Build WebAPI
-        run: dotnet build ./src/WebAPI/WebAPI.csproj --no-restore
+        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj --no-restore
 
       - name: Publish WebAPI
-        run: dotnet publish ./src/WebAPI/WebAPI.csproj -c Release -o out/WebAPI
+        run: dotnet publish ./src/WebAPI/ITX.WebAPI.csproj -c Release -o out/WebAPI
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -49,13 +49,13 @@ jobs:
             dotnet-version: '8.0.x'
 
       - name: Restore for WebMVC
-        run: dotnet restore ./src/WebMVC/WebMVC.csproj
+        run: dotnet restore ./src/WebMVC/ITX.WebMVC.csproj
 
       - name: Build WebMVC
-        run: dotnet build ./src/WebMVC/WebMVC.csproj --no-restore
+        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj --no-restore
 
       - name: Publish WebMVC
-        run: dotnet publish ./src/WebMVC/WebMVC.csproj -c Release -o out/WebMVC
+        run: dotnet publish ./src/WebMVC/ITX.WebMVC.csproj -c Release -o out/WebMVC
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
