@@ -88,11 +88,10 @@ namespace ITX.WebAPI
                     name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44334/")
-                               .WithHeaders("https://localhost:44334/")
-                               .AllowAnyOrigin()
+                        builder.WithOrigins("https://localhost:44334")
                                .AllowAnyHeader()
                                .AllowAnyMethod();
+
                     });
             });
 
@@ -185,10 +184,10 @@ namespace ITX.WebAPI
             }
             app.UseDeveloperExceptionPage();
 
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwaggerDocumentation();
-            }
+            //}
 
             app.UseStaticFiles(new StaticFileOptions
             {
