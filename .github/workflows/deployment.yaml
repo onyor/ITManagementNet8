@@ -1,0 +1,79 @@
+name: .NET Core CI/CD for Multiple Projects
+
+on:
+  push:
+    branches: [ deployment ]
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy_api:
+    runs-on: ubuntu-latest
+    name: Build and Deploy WebAPI
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core for WebAPI
+        uses: actions/setup-dotnet@v1
+        with:
+            dotnet-version: '8.0.x'
+
+      - name: Restore for WebAPI
+        run: dotnet restore ./src/WebAPI/ITX.WebAPI.csproj
+
+      - name: Build WebAPI
+        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj --no-restore
+
+      - name: Publish WebAPI
+        run: dotnet publish ./src/WebAPI/ITX.WebAPI.csproj -c Release -o out/WebAPI
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          if_key_exists: ignore
+
+      - name: Deploy
+        run: scp -r out/WebAPI ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+
+      - name: Restart WebAPI Service
+        run: ssh ${{ secrets.SSH_HOST }} "sudo systemctl restart webapi.service"
+
+      - name: Restart Nginx Service
+        run: ssh ${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
+
+  build_and_deploy_mvc:
+    runs-on: ubuntu-latest
+    name: Build and Deploy WebMVC
+    needs: build_and_deploy_api # Bu işlem, API'nin başarıyla deploy edilmesinden sonra başlar
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core for WebAPI
+        uses: actions/setup-dotnet@v1
+        with:
+            dotnet-version: '8.0.x'
+
+      - name: Restore for WebMVC
+        run: dotnet restore ./src/WebMVC/ITX.WebMVC.csproj
+
+      - name: Build WebMVC
+        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj --no-restore
+      - name: Publish WebMVC
+        run: dotnet publish ./src/WebMVC/ITX.WebMVC.csproj -c Release -o out/WebMVC
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            known_hosts: ${{ secrets.KNOWN_HOSTS }}
+            if_key_exists: ignore
+
+      - name: Deploy
+        run: scp -r out/WebMVC ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+
+      - name: Restart WebMVC Service
+        run: ssh ${{ secrets.SSH_HOST }} "sudo systemctl restart webmvc.service"
+        
+      - name: Restart Nginx Service
+        run: ssh ${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
