@@ -33,9 +33,9 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: ignore
 
-      - name: Deploy WebAPI
-        run: scp -r out/WebAPI onyore@2.59.117.56:/home/onyore/publish
-     
+      - name: Deploy
+        run: scp -r out/WebAPI ${{ secrets.SERVER_USERNAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+
   build_and_deploy_mvc:
     runs-on: ubuntu-latest
     name: Build and Deploy WebMVC
@@ -65,4 +65,4 @@ jobs:
             if_key_exists: ignore
 
       - name: Deploy
-        run: scp -r ./out/WebMVC ${{ secrets.SERVER_USERNAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+        run: scp -r out/WebMVC ${{ secrets.SERVER_USERNAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
