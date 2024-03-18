@@ -36,7 +36,7 @@ jobs:
         run: scp -r out/WebMVC ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
       - name: Restart WebMVC Service
-        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webmvc.service"
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "systemctl restart webmvc.service"
         
       - name: Restart Nginx Service
-        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "systemctl restart nginx"

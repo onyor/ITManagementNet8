@@ -37,8 +37,8 @@ jobs:
         run: scp -r out/WebAPI ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
       - name: Restart WebAPI Service
-        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webapi.service"
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "systemctl restart webapi.service"
 
       - name: Restart Nginx Service
-        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "systemctl restart nginx"
 
