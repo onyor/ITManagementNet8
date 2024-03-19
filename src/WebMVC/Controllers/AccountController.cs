@@ -60,8 +60,8 @@ namespace WebMVC.Controllers
                 {
                     client.BaseAddress = new Uri(ApplicationData.ApiBaseURL + "Account/");
                     _logger.Information("API Base: {APIBase}", ApplicationData.ApiBaseURL);
-                    _logger.Information("LoginViewModel UserName", model.UserName);
-                    _logger.Information("LoginViewModel Password", model.Password);
+                    _logger.Information("UserName: {UserName}", model.UserName);
+                    _logger.Information("Password: {Password}", model.Password);
 
                     using (var content = new MultipartFormDataContent())
                     {
