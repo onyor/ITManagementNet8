@@ -12,16 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache NuGet Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/YourSolution.sln', '**/NuGet.config') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+              
       - name: Setup .NET Core for WebAPI
         uses: actions/setup-dotnet@v1
         with:
             dotnet-version: '8.0.x'
 
-      - name: Restore for WebMVC
-        run: dotnet restore ./src/WebMVC/ITX.WebMVC.csproj
-
       - name: Build WebMVC
-        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj --no-restore
+        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj
       - name: Publish WebMVC
         run: dotnet publish ./src/WebMVC/ITX.WebMVC.csproj -c Release -o out/WebMVC
 
@@ -32,9 +37,15 @@ jobs:
             known_hosts: ${{ secrets.KNOWN_HOSTS }}
             if_key_exists: ignore
 
+      - name: Zip the build files
+        run: tar -czvf WebMVC.tar.gz -C out/WebMVC .
+
       - name: Deploy
         run: scp -r out/WebMVC ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
+      - name: Extract on server
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebMVC.tar.gz -C ${{ vars.WORK_DIR }} && rm ${{ vars.WORK_DIR }}/WebMVC.tar.gz"
+      
       - name: Restart WebMVC Service
         run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webmvc.service"
         

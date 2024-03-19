@@ -12,16 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache NuGet Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/YourSolution.sln', '**/NuGet.config') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
       - name: Setup .NET Core for WebAPI
         uses: actions/setup-dotnet@v1
         with:
             dotnet-version: '8.0.x'
 
-      - name: Restore for WebAPI
-        run: dotnet restore ./src/WebAPI/ITX.WebAPI.csproj
-
       - name: Build WebAPI
-        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj --no-restore
+        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj
 
       - name: Publish WebAPI
         run: dotnet publish ./src/WebAPI/ITX.WebAPI.csproj -c Release -o out/WebAPI
@@ -33,9 +38,15 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: ignore
 
+      - name: Zip the build files
+        run: tar -czvf WebAPI.tar.gz -C out/WebAPI .
+
       - name: Deploy
         run: scp -r out/WebAPI ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
+      - name: Extract on server
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebAPI.tar.gz -C ${{ vars.WORK_DIR }} && rm ${{ vars.WORK_DIR }}/WebAPI.tar.gz"
+      
       - name: Restart WebAPI Service
         run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webapi.service"
 
