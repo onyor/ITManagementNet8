@@ -168,7 +168,8 @@ namespace WebMVC.Controllers
 
                             string serializedModel = System.Text.Json.JsonSerializer.Serialize(loginInfo.StorageModel);
                             TempData["StorageModel"] = serializedModel;
-
+                            _logger.Information("Log: ActionUrl: {ActionUrl}", ActionUrl);
+                            _logger.Information("Log: ActionController: {ActionController}", ActionController);
                             return RedirectToAction(ActionUrl, ActionController);
                         }
                         else
@@ -181,6 +182,10 @@ namespace WebMVC.Controllers
                                 }
 
                             ModelState.AddModelError("IsValid", "false");
+
+                            _logger.Information("Log: Else: {UserName}", model.UserName);
+                            _logger.Information("Log: Else: {Password}", model.Password);
+                            _logger.Information("Log: Else: {IsValid}", model.IsValid);
                             return View(model);
                         }
                     }
