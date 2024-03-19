@@ -59,9 +59,9 @@ namespace WebMVC.Controllers
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(ApplicationData.ApiBaseURL + "Account/");
-                    _logger.Information("API Base: {APIBase}", ApplicationData.ApiBaseURL);
-                    _logger.Information("UserName: {UserName}", model.UserName);
-                    _logger.Information("Password: {Password}", model.Password);
+                    _logger.Information("Log: API Base: {APIBase}", ApplicationData.ApiBaseURL);
+                    _logger.Information("Log: UserName", model.UserName);
+                    _logger.Information("Log: Password", model.Password);
 
                     using (var content = new MultipartFormDataContent())
                     {
@@ -188,6 +188,8 @@ namespace WebMVC.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Information("Log: Password: {Message}", ex.Message);
+
                 TempData["Message"] = ex.Message;
                 return RedirectToAction("Login");
             }
