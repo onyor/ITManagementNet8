@@ -42,7 +42,7 @@ jobs:
         run: tar -czvf WebAPI.tar.gz -C out/WebAPI .
 
       - name: Deploy
-        run: scp -r out/WebAPI ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+        run: scp WebAPI.tar.gz ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
       - name: Extract on server
         run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebAPI.tar.gz -C ${{ vars.WORK_DIR }} && rm ${{ vars.WORK_DIR }}/WebAPI.tar.gz"
