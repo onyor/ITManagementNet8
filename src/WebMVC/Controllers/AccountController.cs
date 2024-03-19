@@ -60,7 +60,9 @@ namespace WebMVC.Controllers
                 {
                     client.BaseAddress = new Uri(ApplicationData.ApiBaseURL + "Account/");
                     _logger.Information("API Base: {APIBase}", ApplicationData.ApiBaseURL);
-                    // Login bilgilerini JSON olarak API'ye gönderiyoruz
+                    _logger.Information("LoginViewModel UserName", model.UserName);
+                    _logger.Information("LoginViewModel Password", model.Password);
+
                     using (var content = new MultipartFormDataContent())
                     {
                         content.Add(new StringContent(model.UserName), "UserName");
