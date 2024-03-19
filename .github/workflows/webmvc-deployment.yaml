@@ -51,3 +51,4 @@ jobs:
         
       - name: Restart Nginx Service
         run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
+        
