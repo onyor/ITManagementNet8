@@ -44,7 +44,7 @@ jobs:
         run: scp WebMVC.tar.gz ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
 
       - name: Extract on server
-        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebMVC.tar.gz -C ${{ vars.WORK_DIR }} && rm ${{ vars.WORK_DIR }}/WebMVC.tar.gz"
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebMVC.tar.gz -C ${{ vars.WORK_DIR }}/WebMVC/ && rm ${{ vars.WORK_DIR }}/WebMVC.tar.gz"
       
       - name: Restart WebMVC Service
         run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webmvc.service"
