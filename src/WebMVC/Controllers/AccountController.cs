@@ -74,6 +74,7 @@ namespace WebMVC.Controllers
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             var jsonObj = JsonConvert.DeserializeObject<JObject>(jsonString);
+                            _logger.Information("Log Api Login Result \n: {jsonObj}", jsonObj);
 
                             var valuePart = jsonObj["value"].ToString();
 
