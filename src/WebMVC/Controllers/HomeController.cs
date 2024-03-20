@@ -17,8 +17,8 @@ using static AuthorizePageAttribute;
 
 namespace WebMVC.Controllers
 {
-    [BypassAuthorizePage]
-    public class HomeController : BaseController
+    //[BypassAuthorizePage]
+    public class HomeController : Controller
     {
         public IActionResult Dashboard() => View();
         public IActionResult Tester() => View();
