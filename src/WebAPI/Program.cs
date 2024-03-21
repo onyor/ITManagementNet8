@@ -185,10 +185,8 @@ namespace ITX.WebAPI
             }
             app.UseDeveloperExceptionPage();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwaggerDocumentation();
-            }
+
+            app.UseSwaggerDocumentation();
 
             app.UseStaticFiles(new StaticFileOptions
             {
