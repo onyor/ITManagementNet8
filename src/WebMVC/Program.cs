@@ -34,6 +34,23 @@ Log.Logger = new LoggerConfiguration()
 
 ApplicationData.ApiBaseURL = configuration.GetValue<string>("ApiBaseURL").xToString();
 
+// CORS policy name
+const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: MyAllowSpecificOrigins,
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:44336/")
+                               .WithHeaders("https://localhost:44336/")
+                               .AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+        });
+});
+
 // Uygulama servislerine Serilog'u ekleyin
 builder.Services.AddLogging(lb => lb.AddSerilog());
 
@@ -79,6 +96,8 @@ app.UseMiddleware<ConfigurationMiddleware>();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseMiddleware<LogoutUsersMiddleware>();
 

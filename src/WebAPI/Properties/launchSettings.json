@@ -1,24 +1,14 @@
 {
   "profiles": {
-    "ITXManagement": { // REPLACE PROJECT_NAME WITH YOU ACTUAL PROJECT NAME
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "IISExpress": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      //"launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Home": {
+    "WebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
