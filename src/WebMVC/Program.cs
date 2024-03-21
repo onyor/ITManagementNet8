@@ -84,7 +84,8 @@ app.UseMiddleware<LogoutUsersMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}");
-app.MapControllerRoute("EDevletLoginRoute", "edevletgiris.cshtml", new { controller = "Account", action = "EDevletLogin" });
+    pattern: "{controller=Account}/{action=Login}/{id?}");
+
+//app.MapControllerRoute("EDevletLoginRoute", "edevletgiris.cshtml", new { controller = "Account", action = "EDevletLogin" });
 
 app.Run();
