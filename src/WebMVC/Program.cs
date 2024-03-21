@@ -1,16 +1,14 @@
-﻿using DevExpress.XtraCharts;
+﻿using ITX.Application;
+using ITX.Persistance.Extensions;
+using ITX.WebMVC.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ITX.Application;
-using ITX.Persistance.Extensions;
-using ITX.WebMVC.Extensions;
 using Serilog;
 using System;
-using System.IO;
-using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,7 +88,9 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.UseMiddleware<CookieMiddleware>();
+
 app.UseMiddleware<ConfigurationMiddleware>();
 
 app.UseAuthentication();
