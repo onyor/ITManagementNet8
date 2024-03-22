@@ -6,63 +6,74 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_deploy_api:
+  build_and_deploy_mvc:
     runs-on: ubuntu-latest
-    name: Build and Deploy WebAPI
+    name: Build and Deploy WebMVC
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup .NET Core for WebAPI
+      - name: Cache NuGet Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/YourSolution.sln', '**/NuGet.config') }}
+          restore-keys: ${{ runner.os }}-nuget-
+      - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: '8.0.x'
-
-      - name: Restore for WebAPI
-        run: dotnet restore ./src/WebAPI/ITX.WebAPI.csproj
-
-      - name: Build WebAPI
-        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj --no-restore
-
-      - name: Publish WebAPI
-        run: dotnet publish ./src/WebAPI/ITX.WebAPI.csproj -c Release -o out/WebAPI
-
+          dotnet-version: '8.0.x'
+      - name: Build WebMVC
+        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj
+      - name: Publish WebMVC
+        run: dotnet publish ./src/WebMVC/ITX.WebMVC.csproj -c Release -o out/WebMVC
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: ignore
-
+      - name: Zip the build files
+        run: tar -czvf WebMVC.tar.gz -C out/WebMVC .
       - name: Deploy
-        run: scp -r out/WebAPI ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+        run: scp WebMVC.tar.gz ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+      - name: Extract on server
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebMVC.tar.gz -C ${{ vars.WORK_DIR }}/WebMVC/ && rm ${{ vars.WORK_DIR }}/WebMVC.tar.gz"
+      - name: Restart WebMVC Service
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webmvc.service"
+      - name: Restart Nginx Service
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
 
-  build_and_deploy_mvc:
+  build_and_deploy_api:
     runs-on: ubuntu-latest
-    name: Build and Deploy WebMVC
-    needs: build_and_deploy_api # Bu işlem, API'nin başarıyla deploy edilmesinden sonra başlar
+    name: Build and Deploy WebAPI
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup .NET Core for WebAPI
+      - name: Cache NuGet Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/YourSolution.sln', '**/NuGet.config') }}
+          restore-keys: ${{ runner.os }}-nuget-
+      - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: '8.0.x'
-
-      - name: Restore for WebMVC
-        run: dotnet restore ./src/WebMVC/ITX.WebMVC.csproj
-
-      - name: Build WebMVC
-        run: dotnet build ./src/WebMVC/ITX.WebMVC.csproj --no-restore
-
-      - name: Publish WebMVC
-        run: dotnet publish ./src/WebMVC/ITX.WebMVC.csproj -c Release -o out/WebMVC
-
+          dotnet-version: '8.0.x'
+      - name: Build WebAPI
+        run: dotnet build ./src/WebAPI/ITX.WebAPI.csproj
+      - name: Publish WebAPI
+        run: dotnet publish ./src/WebAPI/ITX.WebAPI.csproj -c Release -o out/WebAPI
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            known_hosts: ${{ secrets.KNOWN_HOSTS }}
-            if_key_exists: ignore
-
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          if_key_exists: ignore
+      - name: Zip the build files
+        run: tar -czvf WebAPI.tar.gz -C out/WebAPI .
       - name: Deploy
-        run: scp -r out/WebMVC ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+        run: scp WebAPI.tar.gz ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }}:${{ vars.WORK_DIR }}
+      - name: Extract on server
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "tar -xzvf ${{vars.WORK_DIR }}/WebAPI.tar.gz -C ${{ vars.WORK_DIR }}/WebAPI/ && rm ${{ vars.WORK_DIR }}/WebAPI.tar.gz"
+      - name: Restart WebAPI Service
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart webapi.service"
+      - name: Restart Nginx Service
+        run: ssh ${{ vars.USER_NAME }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"

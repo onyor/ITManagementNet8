@@ -17,7 +17,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -88,10 +87,11 @@ namespace ITX.WebAPI
                     name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44334")
+                        builder.WithOrigins("https://localhost:44334/")
+                               .WithHeaders("https://localhost:44334/")
+                               .AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod();
-
                     });
             });
 
@@ -184,10 +184,8 @@ namespace ITX.WebAPI
             }
             app.UseDeveloperExceptionPage();
 
-            //if (app.Environment.IsDevelopment())
-            //{
-                app.UseSwaggerDocumentation();
-            //}
+
+            app.UseSwaggerDocumentation();
 
             app.UseStaticFiles(new StaticFileOptions
             {

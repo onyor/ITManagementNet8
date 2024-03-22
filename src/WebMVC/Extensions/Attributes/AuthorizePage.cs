@@ -6,9 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using ITX.Application.Dtos.Identity;
+using Serilog;
 
 public class AuthorizePageAttribute : ActionFilterAttribute
 {
+    private readonly ILogger _logger;
+
+    public AuthorizePageAttribute()
+    {
+        _logger = Log.ForContext<AuthorizePageAttribute>();
+    }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class BypassAuthorizePageAttribute : Attribute
@@ -17,6 +24,7 @@ public class AuthorizePageAttribute : ActionFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
+
         if (context.ActionDescriptor.EndpointMetadata.Any(m => m is BypassAuthorizePageAttribute))
         {
             return;
@@ -38,10 +46,18 @@ public class AuthorizePageAttribute : ActionFilterAttribute
             var isAuthorized = allowedRoles.Any(allowedRole => userRoles.Contains(allowedRole.RoleName));
 
             if (!isAuthorized)
+            {
+                _logger.Information("Log: Password: {isAuthorized}", isAuthorized);
+
                 context.Result = new RedirectToActionResult("AccessDenied", "Account", null);
+            }
         }
         else
+        {
+            _logger.Information("Log: Else/AuthorizePageAttribute");
+
             context.Result = new RedirectToActionResult("AccessDenied", "Account", null);
+        }
     }
 }
 

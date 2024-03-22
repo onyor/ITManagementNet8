@@ -59,8 +59,10 @@ namespace WebMVC.Controllers
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(ApplicationData.ApiBaseURL + "Account/");
-                    _logger.Information("API Base: {APIBase}", ApplicationData.ApiBaseURL);
-                    // Login bilgilerini JSON olarak API'ye gönderiyoruz
+                    _logger.Information("Log: API Base: {APIBase}", ApplicationData.ApiBaseURL);
+                    _logger.Information("Log: {UserName}", model.UserName);
+                    _logger.Information("Log: {Password}", model.Password);
+
                     using (var content = new MultipartFormDataContent())
                     {
                         content.Add(new StringContent(model.UserName), "UserName");
@@ -72,6 +74,7 @@ namespace WebMVC.Controllers
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             var jsonObj = JsonConvert.DeserializeObject<JObject>(jsonString);
+                            _logger.Information("Log Api Login Result \n: {jsonObj}", jsonObj);
 
                             var valuePart = jsonObj["value"].ToString();
 
@@ -166,7 +169,8 @@ namespace WebMVC.Controllers
 
                             string serializedModel = System.Text.Json.JsonSerializer.Serialize(loginInfo.StorageModel);
                             TempData["StorageModel"] = serializedModel;
-
+                            _logger.Information("Log: ActionUrl: {ActionUrl}", ActionUrl);
+                            _logger.Information("Log: ActionController: {ActionController}", ActionController);
                             return RedirectToAction(ActionUrl, ActionController);
                         }
                         else
@@ -179,6 +183,10 @@ namespace WebMVC.Controllers
                                 }
 
                             ModelState.AddModelError("IsValid", "false");
+
+                            _logger.Information("Log: Else: {UserName}", model.UserName);
+                            _logger.Information("Log: Else: {Password}", model.Password);
+                            _logger.Information("Log: Else: {IsValid}", model.IsValid);
                             return View(model);
                         }
                     }
@@ -186,6 +194,8 @@ namespace WebMVC.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Information("Log: Password: {Message}", ex.Message);
+
                 TempData["Message"] = ex.Message;
                 return RedirectToAction("Login");
             }

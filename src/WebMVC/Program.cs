@@ -1,15 +1,14 @@
-﻿using DevExpress.XtraCharts;
+﻿using ITX.Application;
+using ITX.Persistance.Extensions;
+using ITX.WebMVC.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ITX.Application;
-using ITX.Persistance.Extensions;
-using ITX.WebMVC.Extensions;
 using Serilog;
 using System;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +32,23 @@ Log.Logger = new LoggerConfiguration()
 
 ApplicationData.ApiBaseURL = configuration.GetValue<string>("ApiBaseURL").xToString();
 
+// CORS policy name
+const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: MyAllowSpecificOrigins,
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:44336/")
+                               .WithHeaders("https://localhost:44336/")
+                               .AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+        });
+});
+
 // Uygulama servislerine Serilog'u ekleyin
 builder.Services.AddLogging(lb => lb.AddSerilog());
 
@@ -53,33 +69,42 @@ builder.Services.AddSingleton<ISessionService, SessionService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.UseMiddleware<CookieMiddleware>();
+
 app.UseMiddleware<ConfigurationMiddleware>();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseMiddleware<LogoutUsersMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
-app.MapControllerRoute("EDevletLoginRoute", "edevletgiris.cshtml", new { controller = "Account", action = "EDevletLogin" });
 
+//app.MapControllerRoute("EDevletLoginRoute", "edevletgiris.cshtml", new { controller = "Account", action = "EDevletLogin" });
 
 app.Run();
