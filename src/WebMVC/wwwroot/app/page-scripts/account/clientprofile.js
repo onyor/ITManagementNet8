@@ -306,12 +306,8 @@
         AllOk: function () {
             var IsLaw = $("input[alt='KVKK Açık Rıza Onay Formu']").is(':checked');
             var ExplicitConsent = $("input[alt='KVKK Aydınlatma Metni']").is(':checked');
-            debugger;
-            if (IsLaw === true && ExplicitConsent === true && $("#DormId").val() != '') {
+            if (IsLaw === true && ExplicitConsent === true && $("#DormId").val() != '')
                 ClientProfilePage.Helpers.CreateNewClientProfile();
-                //$(".clientDataClass").unblock();
-                //$(".btnSave").show(200);
-            }
             else {
                 //ClientProfilePage.Helpers.BlockComponent(".clientDataClass");
                 iTech.Helpers.ClearForm($(`form[name='${ClientProfilePage.Variables.FormName}Form']`));
@@ -379,7 +375,6 @@
                         $(".btnSave").show(200);
 
                     } else {
-                        debugger;
                         localStorage.removeItem("eDevletUserInfo");
                         localStorage.setItem("hataMesaji", JSON.stringify(res.message));
                         window.location.href = `/`;

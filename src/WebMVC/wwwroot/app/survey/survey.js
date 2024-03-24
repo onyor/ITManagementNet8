@@ -294,7 +294,6 @@ const SaveAnswerData = {
         }
 
         if (choiceId) dto["ChoiceDataId"] = choiceId;
-        debugger;
 
         await this.sendData(dto);
     },

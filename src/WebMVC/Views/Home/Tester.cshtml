@@ -15,7 +15,6 @@
 <script type="text/javascript">
     var model = @Html.Raw(Json.Serialize(ViewBag.DecodedModel));
     if (model != null) {
-        debugger;
         localStorage.setItem("ITManagement.ExpirationMinutes", new Date().getTime() + model.expirationMinutes * 60 * 1000);
         localStorage.setItem("ITManagement.UserInfo", JSON.stringify(model));
     }

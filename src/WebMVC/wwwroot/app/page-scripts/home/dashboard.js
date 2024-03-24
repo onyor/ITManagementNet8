@@ -244,7 +244,6 @@
             });
         },
         GetAdviserCalendarCalenderData: async function (pShowOnlyFilledEvents = true) {
-            debugger;
             if (pShowOnlyFilledEvents == undefined || pShowOnlyFilledEvents == null)
                 pShowOnlyFilledEvents = DashboardPage.Variables.ShowOnlyFilledEvents;
             else
