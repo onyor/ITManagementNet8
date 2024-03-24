@@ -187,7 +187,6 @@
                 if (res.isSuccess) {
                     var oResult = res.value;
                     if (oResult.data != undefined && oResult.data != null && oResult.data != "" && !LoginPage.Variables.TokenResult) {
-                        debugger;
                         //bunu sayfa çok geç yüklenirse tekrar bu fonksiyona girmemesi için önlem olarak koydum 21.12.23
                         LoginPage.Variables.TokenResult = true;
                         //var citizenNo = parseInt(oResult.data.citizienNumber);

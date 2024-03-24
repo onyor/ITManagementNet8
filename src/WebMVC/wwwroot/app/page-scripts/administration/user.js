@@ -78,7 +78,6 @@
                 $url = UserPage.Variables.SaveMethod,
                 $requestData = data
             ).then(async result => {
-                debugger;
                 if (result.isSuccess) {
                     iTech.ShowMessage(ShowMessages.EkleBaslik, ShowMessages.EkleMesaj);
                     iTech.DataTable.Refresh.Tables("#UserTable");

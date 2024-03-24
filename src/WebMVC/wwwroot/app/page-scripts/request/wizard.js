@@ -449,7 +449,6 @@
                 if (!isSuccess) {
                     return false;
                 } else {
-                    debugger;
                     if (WizardPage.Variables.WizardLastStep && currentStepIdx > 0) {
                         var SurveyAnswerIds = WizardPage.Variables.SurveyAnswerIds[currentStepIdx];
 
